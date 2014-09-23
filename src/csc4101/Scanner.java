@@ -159,11 +159,11 @@ class Scanner {
      */
     private boolean isAlphabetic(char c) {
         //          uppercase alphabet     lowercase alphabet
-        return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) ? true : false;
+        return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
     }
 
     private boolean isNumber(char c) {
-        return (c >= '0' && c >= '9');
+        return (c >= '0' && c <= '9');
     }
 
     /**
