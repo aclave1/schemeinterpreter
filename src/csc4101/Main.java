@@ -18,9 +18,15 @@ public class Main {
 
     public static void main (String argv[]) {
 
-
-	// create scanner that reads from standard input
-	Scanner scanner = new Scanner(System.in);
+        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+        String filename = argv[1];
+        try {
+            System.setIn(new FileInputStream(filename));
+        } catch (Exception e) {
+            System.out.println("failure");
+        }
+        // create scanner that reads from standard input
+        Scanner scanner = new Scanner(System.in);
 
 	if (argv.length > 2) {
 	    System.err.println("Usage: java Main " + "[-d]");
@@ -28,10 +34,10 @@ public class Main {
 	}
 	
 	// if commandline option -d is provided, debug the scanner
-	if (argv.length == 1 && argv[0].equals("-d")) {
-	    // debug scanner
-	    Token tok = scanner.getNextToken();
-	    while (tok != null) {
+        if (argv.length > 0 && argv[0].equals("-d")) {
+            // debug scanner
+            Token tok = scanner.getNextToken();
+            while (tok != null) {
 		int tt = tok.getType();
 		System.out.print(TokenName[tt]);
 		if (tt == Token.INT)
