@@ -1,6 +1,6 @@
 package csc4101;
 
-class StrToken extends Token {
+public class StrToken extends Token {
   private String strVal;
 
   public StrToken(String s) {

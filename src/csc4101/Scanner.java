@@ -3,10 +3,16 @@ package csc4101;// Scanner.java -- the implementation of class Scanner
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.IllegalFormatException;
 
-class Scanner {
+public class Scanner {
     private PushbackInputStream in;
-    private byte[] buf = new byte[1000];
+    private final int bufSize = 1000;
+    private final int intSize = 20;
+    private byte[] buf = new byte[bufSize];
+
 
     public Scanner(InputStream i) {
         in = new PushbackInputStream(i);
@@ -19,7 +25,6 @@ class Scanner {
         // and read characters out of that buffer, but reading individual
         // characters from the input stream is easier.
 
-        //
         bite = tryRead(in);
 
         if (bite == -1)
@@ -64,40 +69,83 @@ class Scanner {
         }
 
         // String constants
-        //quote character ' " '
-        else if (ch == '"') {
-            // TODO: scan a string into the buffer variable buf
-            return new StrToken(buf.toString());
+        else if (isQuote(ch)) {
+            int i = 0;
+            char c = (char) tryRead(in);
+
+            while(!isQuote(c)){
+                //the user might be trying to escape something
+                if(c == '\\'){
+                    char escaped = (char) tryRead(in);
+                    if(isEscapedChar(c,escaped)){
+                        buf[i] = (byte) escaped;
+                    }else{
+                        //just a random backslash
+                        System.err.println("Illegal character encountered in string, returning error string");
+                        return new StrToken("Error: String Format Exception");
+                    }
+                }else{
+                    buf[i] = (byte)c;
+                }
+                i++;
+                c = (char) tryRead(in);
+            }
+
+            String quotedString = new String(Arrays.copyOfRange(buf,0,i));
+            return new StrToken(quotedString);
         }
 
         // Integer constants
-        else if (ch >= '0' && ch <= '9') {
-            int i = ch - '0';
-            // TODO: scan the number and convert it to an integer
+        else if (isNumber(ch)) {
+
+            char[] intChars = new char[20];
+            intChars[0] = ch;
+            int i = 1;
+            char c = (char) tryRead(in);
+
+            while(!isDelimiter(c)){
+                if(i==intSize)throw new ArrayIndexOutOfBoundsException();
+                intChars[i] = c;
+                c = (char) tryRead(in);
+                i++;
+            }
+
+            int tokenValue = Integer.parseInt(new String(Arrays.copyOfRange(intChars,0,i)));
 
             // put the character after the integer back into the input
-            // in->putback(ch);
-            return new IntToken(i);
+            tryUnread(in,c);
+            return new IntToken(tokenValue);
         }
 
         // Operators: +, -, *, /
         else if (ch == '+' || ch == '-' || ch == '/' || ch == '*')
             return new IdentToken(Character.toString(ch));
 
-            // Identifiers
-        else if (isAlphabetic(ch)
-         /* or ch is some other valid first character for an identifier */) {
-            // TODO: scan an identifier into the buffer
+        // Identifiers
+        else if (isValidInitial(ch)) {
 
+            buf[0] = (byte) ch;
+
+
+            int i = 1;
             char c = (char) tryRead(in);
 
-            while (c >= 'A' && c <= 'Z') {
-
+            while(isValidSubsequent(c)){
+                buf[i] = (byte)c;
+                c = (char) tryRead(in);
+                if(i == bufSize-1) throw new ArrayIndexOutOfBoundsException();
+                i++;
             }
 
+            //only copy what matters to the string
+            String ident = new String(Arrays.copyOfRange(buf,0,i));
+
+            buf = new byte[bufSize];
+
+
             // put the character after the identifier back into the input
-            // in->putback(ch);
-            return new IdentToken(buf.toString());
+            tryUnread(in,c);
+            return new IdentToken(ident);
         }
 
         // Illegal character
@@ -115,6 +163,14 @@ class Scanner {
             System.err.println("We fail: " + e.getMessage());
         }
         return b;
+    }
+
+    private void tryUnread(PushbackInputStream str, char c){
+            try{
+                in.unread((int)c);
+            }catch(Exception e){
+                System.out.println("Couldn't unread char");
+            }
     }
 
     /**
@@ -206,6 +262,14 @@ class Scanner {
                 c == '|' ||
                 c == '~');
     }
+
+
+    private boolean isEscapedChar(char backslash,char c){
+        if(backslash == '\\'){
+            return (c== '\"' || c == '\\');
+        }else return false;
+    }
+
 
     private boolean isDelimiter(char c) {
         return (c == ' ' ||

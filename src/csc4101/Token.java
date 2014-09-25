@@ -1,6 +1,6 @@
 package csc4101;
 
-class Token implements TokenType {
+public class Token implements TokenType {
   private int tt;
 
   Token(int t) {
