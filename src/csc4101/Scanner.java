@@ -148,7 +148,7 @@ public class Scanner {
             }
 
             //only copy what matters to the string
-            String ident = new String(Arrays.copyOfRange(buf, 0, i));
+            String ident = new String(Arrays.copyOfRange(buf, 0, i)).toLowerCase();
 
             buf = new byte[bufSize];
 
