@@ -35,9 +35,19 @@ public class Scanner {
         // Special characters
         if (ch == '\'')
             return new Token(Token.QUOTE);
-        else if (ch == ' ') {
+        //whitespace
+        else if (isWhiteSpace(ch)) {
             return getNextToken();
-        } else if (ch == '(')
+        }else if(isComment(ch)){
+
+            char c = (char)tryRead(in);
+
+            while(!isEndOfLine(c)){
+                c = (char)tryRead(in);
+            }
+            return getNextToken();
+        }
+        else if (ch == '(')
             return new Token(Token.LPAREN);
         else if (ch == ')')
             return new Token(Token.RPAREN);
@@ -73,25 +83,25 @@ public class Scanner {
             int i = 0;
             char c = (char) tryRead(in);
 
-            while(!isQuote(c)){
+            while (!isQuote(c)) {
                 //the user might be trying to escape something
-                if(c == '\\'){
+                if (c == '\\') {
                     char escaped = (char) tryRead(in);
-                    if(isEscapedChar(c,escaped)){
+                    if (isEscapedChar(c, escaped)) {
                         buf[i] = (byte) escaped;
-                    }else{
+                    } else {
                         //just a random backslash
                         System.err.println("Illegal character encountered in string, returning error string");
                         return new StrToken("Error: String Format Exception");
                     }
-                }else{
-                    buf[i] = (byte)c;
+                } else {
+                    buf[i] = (byte) c;
                 }
                 i++;
                 c = (char) tryRead(in);
             }
 
-            String quotedString = new String(Arrays.copyOfRange(buf,0,i));
+            String quotedString = new String(Arrays.copyOfRange(buf, 0, i));
             return new StrToken(quotedString);
         }
 
@@ -103,17 +113,17 @@ public class Scanner {
             int i = 1;
             char c = (char) tryRead(in);
 
-            while(!isDelimiter(c)){
-                if(i==intSize)throw new ArrayIndexOutOfBoundsException();
+            while (!isDelimiter(c)) {
+                if (i == intSize) throw new ArrayIndexOutOfBoundsException();
                 intChars[i] = c;
                 c = (char) tryRead(in);
                 i++;
             }
 
-            int tokenValue = Integer.parseInt(new String(Arrays.copyOfRange(intChars,0,i)));
+            int tokenValue = Integer.parseInt(new String(Arrays.copyOfRange(intChars, 0, i)));
 
             // put the character after the integer back into the input
-            tryUnread(in,c);
+            tryUnread(in, c);
             return new IntToken(tokenValue);
         }
 
@@ -121,7 +131,7 @@ public class Scanner {
         else if (ch == '+' || ch == '-' || ch == '/' || ch == '*')
             return new IdentToken(Character.toString(ch));
 
-        // Identifiers
+            // Identifiers
         else if (isValidInitial(ch)) {
 
             buf[0] = (byte) ch;
@@ -130,21 +140,21 @@ public class Scanner {
             int i = 1;
             char c = (char) tryRead(in);
 
-            while(isValidSubsequent(c)){
-                buf[i] = (byte)c;
+            while (isValidSubsequent(c)) {
+                buf[i] = (byte) c;
                 c = (char) tryRead(in);
-                if(i == bufSize-1) throw new ArrayIndexOutOfBoundsException();
+                if (i == bufSize - 1) throw new ArrayIndexOutOfBoundsException();
                 i++;
             }
 
             //only copy what matters to the string
-            String ident = new String(Arrays.copyOfRange(buf,0,i));
+            String ident = new String(Arrays.copyOfRange(buf, 0, i));
 
             buf = new byte[bufSize];
 
 
             // put the character after the identifier back into the input
-            tryUnread(in,c);
+            tryUnread(in, c);
             return new IdentToken(ident);
         }
 
@@ -165,31 +175,32 @@ public class Scanner {
         return b;
     }
 
-    private void tryUnread(PushbackInputStream str, char c){
-            try{
-                in.unread((int)c);
-            }catch(Exception e){
-                System.out.println("Couldn't unread char");
-            }
+    private void tryUnread(PushbackInputStream str, char c) {
+        try {
+            in.unread((int) c);
+        } catch (Exception e) {
+            System.out.println("Couldn't unread char");
+        }
     }
 
     /**
      * @param ident a char[] representing a potential identifier
      * @return true if this char[] adheres to:
-     *
-        <identifier> --> <initial> <subsequent>*
-             | <peculiar identifier>
-        <initial> --> <letter> | <special initial>
-        <letter> --> a | b | c | ... | z
-
-        <special initial> --> ! | $ | % | & | * | / | : | < | =
-             | > | ? | ^ | _ | ~
-        <subsequent> --> <initial> | <digit>
-             | <special subsequent>
-        <digit> --> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-        <special subsequent> --> + | - | . | @
-     *
-     * **/
+     * <p/>
+     * <identifier> --> <initial> <subsequent>*
+     * | <peculiar identifier>
+     * <initial> --> <letter> | <special initial>
+     * <letter> --> a | b | c | ... | z
+     * <p/>
+     * <special initial> --> ! | $ | % | & | * | / | : | < | =
+     * | > | ? | ^ | _ | ~
+     * <subsequent> --> <initial> | <digit>
+     * | <special subsequent>
+     * <digit> --> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+     * <special subsequent> --> + | - | . | @
+     * <p/>
+     * *
+     */
     private boolean isValidIdent(char[] ident) {
         if (!isValidInitial(ident[0])) return false;
         for (int i = 1; i < ident.length; i++) {
@@ -205,7 +216,7 @@ public class Scanner {
     }
 
     private boolean isValidSubsequent(char c) {
-        return (isValidInitial(c)  ||
+        return (isValidInitial(c) ||
                 isNumber(c) ||
                 isSpecialSubsequent(c));
     }
@@ -264,10 +275,26 @@ public class Scanner {
     }
 
 
-    private boolean isEscapedChar(char backslash,char c){
-        if(backslash == '\\'){
-            return (c== '\"' || c == '\\');
-        }else return false;
+    private boolean isEscapedChar(char backslash, char c) {
+        if (backslash == '\\') {
+            return (c == '\"' || c == '\\');
+        } else return false;
+    }
+
+    private boolean isComment(char c){
+        return c == ';';
+    }
+
+    private boolean isWhiteSpace(char c) {
+        return (c == ' ' || isEndOfLine(c));
+    }
+
+
+    private boolean isEndOfLine(char c){
+        return (c == '\n' ||
+                c == '\r' ||
+                c == '\t' ||
+                c == '\f');
     }
 
 
@@ -276,7 +303,8 @@ public class Scanner {
                 c == '(' ||
                 c == ')' ||
                 c == ';' ||
-                isQuote(c)
+                isQuote(c)||
+                isEndOfLine(c)
         );
     }
 
