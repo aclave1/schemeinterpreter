@@ -33,20 +33,60 @@ package csc4101;// Parser.java -- the implementation of class Parser
 // parser discards the offending token (which probably was a DOT
 // or an RPAREN) and attempts to continue parsing with the next token.
 
-class Parser {
-  private Scanner scanner;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-  public Parser(Scanner s) { scanner = s; }
-  
-  public Node parseExp() {
-    // TODO: write code for parsing an exp
-    return null;
-  }
-  
-  protected Node parseRest() {
-    // TODO: write code for parsing rest
-    return null;
-  }
-  
-  // TODO: Add any additional methods you might need.
+class Parser {
+    private Scanner scanner;
+
+    public Parser(Scanner s) {
+        scanner = s;
+    }
+
+    public Node parseExp() {
+        Token token = scanner.getNextToken();
+        return parseExp(token);
+    }
+
+    public Node parseExp(Token token) {
+
+        int tokenType = token.getType();
+
+        if (tokenType == TokenType.LPAREN) {
+            return parseRest();
+        } else if (tokenType == TokenType.IDENT) {
+            return new Ident(token.getName());
+        } else if (tokenType == TokenType.INT) {
+            return new IntLit(token.getIntVal());
+        } else if (tokenType == TokenType.STRING) {
+            return new StrLit(token.getStrVal());
+        } else if (tokenType == TokenType.TRUE) {
+            return new BooleanLit(true);
+        } else if (tokenType == TokenType.FALSE) {
+            return new BooleanLit(false);
+        } else if (tokenType == TokenType.QUOTE) {
+            return new Cons(new Ident("quote"),new Cons(parseExp(),new Nil()));
+        }else{
+            return null;
+        }
+    }
+
+    protected Node parseRest() {
+
+        Token token = scanner.getNextToken();
+        int tokenType = token.getType();
+
+        if(tokenType == TokenType.DOT){
+            throw new NotImplementedException();
+        }else if(tokenType == TokenType.RPAREN){
+            return new Nil();
+        }else{
+            return new Cons(parseExp(token),parseRest());
+        }
+    }
+
+    protected Node parseRest(Token tok) {
+        throw new NotImplementedException();
+    }
+
+    // TODO: Add any additional methods you might need.
 };

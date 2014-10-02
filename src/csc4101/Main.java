@@ -19,7 +19,7 @@ public class Main {
     public static void main (String argv[]) {
 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        String filename = argv[1];
+        String filename = argv[0];
         try {
             System.setIn(new FileInputStream(filename));
         } catch (Exception e) {
@@ -59,10 +59,10 @@ public class Main {
 	
 	// Parse and pretty-print each input expression
 	root = parser.parseExp();
-	while (root != null) {
-	    root.print(0);
-	    root = parser.parseExp();
-	}
+//	while (root != null) {
+//	    root.print(0);
+//	    root = parser.parseExp();
+//	}
 	System.exit(0);
     }
 }
