@@ -76,17 +76,11 @@ class Parser {
         int tokenType = token.getType();
 
         if(tokenType == TokenType.DOT){
-            throw new NotImplementedException();
+            return new Cons(parseExp(),parseRest());
         }else if(tokenType == TokenType.RPAREN){
             return new Nil();
         }else{
             return new Cons(parseExp(token),parseRest());
         }
     }
-
-    protected Node parseRest(Token tok) {
-        throw new NotImplementedException();
-    }
-
-    // TODO: Add any additional methods you might need.
 };
