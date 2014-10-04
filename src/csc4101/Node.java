@@ -7,6 +7,10 @@ class Node {
   // Every subclass of Node must implement print(int).
   void print(int n) {}
 
+  public void printIndentation(int n){
+      for (int i = 0; i < n; i++)
+          System.out.print(" ");
+  }
   // The first argument of print(int, boolean) is the number of characters
   // to indent.  It is interpreted the same as for print(int).
   // The second argument is only useful for lists (nodes of classes

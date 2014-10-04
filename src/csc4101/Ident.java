@@ -6,10 +6,13 @@ class Ident extends Node {
 
   public Ident(String n) { name = n; }
 
+    public String getName(){
+        return name;
+    }
   public void print(int n) {
     for (int i = 0; i < n; i++)
       System.out.print(" ");
 
-    System.out.println(name);
+    System.out.printf("%s ",name);
   }
 }
