@@ -1,5 +1,7 @@
 package csc4101;
 
+import java.io.InvalidClassException;
+
 class Cons extends Node {
     private Node car;
     private Node cdr;
@@ -13,52 +15,55 @@ class Cons extends Node {
     // parseList only look at the car for selecting the appropriate
     // object from the Special hierarchy and to leave the rest of
     // parsing up to the interpreter.
-    void parseList() {
-    }
-
     void parseList(Node n){
-
+        if(isRegular(n)){
+            form = new Regular(n);
+        }else{
+            form = parseSpecial(n);
+        }
     }
 
-    // TODO: Add any helper functions for parseList as appropriate.
-    private Special parseSpecial(Node n){
-        if(!( n instanceof Ident)) return null;
-
+    private Special parseSpecial(Node n) {
         Ident i = (Ident)n;
         String name = i.getName();
-        if( name == "quote"){
+        if( name.equals("quote")){
             return new Quote();
-        }else if(name == "lambda"){
+        }else if(name.equals("lambda")){
             return new Lambda();
-        }else if(name == "begin"){
+        }else if(name.equals("begin")){
             return new Begin();
-        }else if(name == "if"){
+        }else if(name.equals("if")){
             return new If();
-        }else if(name == "let"){
+        }else if(name.equals("let")){
             return new Let();
-        }else if(name == "cond"){
+        }else if(name.equals("cond")){
             return new Cond();
-        }else if(name == "define"){
+        }else if(name.equals("define")){
             return new Define();
-        }else if(name == "set!"){
+        }else if(name.equals("set!")){
             return new Set();
         }else{
-            return null;
+            return new Regular(n);
         }
-
     }
+
+    /**
+     * Is regular and not an Ident
+     * */
     private boolean isRegular(Node n){
         return (n instanceof IntLit ||
                 n instanceof StrLit ||
-                n instanceof BooleanLit);
+                n instanceof BooleanLit ||
+                n instanceof Nil ||
+                n instanceof Cons
+        );
     }
-
 
 
     public Cons(Node a, Node d) {
         car = a;
         cdr = d;
-        parseList();
+        parseList(car);
     }
 
     void print(int n) {
