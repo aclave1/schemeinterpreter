@@ -3,12 +3,11 @@ package csc4101;
 import java.io.*;
 
 class Lambda extends Special {
- 
-    // TODO: Add any fields needed.
 
- 
-    // TODO: Add an appropriate constructor.
+    private static final String text = "lambda";
 
-    void print(Node t, int n, boolean p) {
+    @Override
+    public String getText() {
+        return text;
     }
 }

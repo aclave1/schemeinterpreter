@@ -1,13 +1,10 @@
 package csc4101;
 
-import java.io.*;
-
 class Begin extends Special {
- 
-    // TODO: Add any fields needed.
- 
-    // TODO: Add an appropriate constructor.
+    private static final String text = "begin\n";
 
-    void print(Node t, int n, boolean p) {
+    @Override
+    public String getText() {
+        return text;
     }
 }

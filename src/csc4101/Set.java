@@ -3,12 +3,10 @@ package csc4101;
 import java.io.*;
 
 class Set extends Special {
- 
-    // TODO: Add any fields needed.
 
- 
-    // TODO: Add an appropriate constructor.
-
-    void print(Node t, int n, boolean p) {
+    private static final String text = "set!";
+    @Override
+    public String getText() {
+        return text;
     }
 }

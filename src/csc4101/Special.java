@@ -7,10 +7,26 @@ import java.io.*;
 // is to not add any fields and to use empty constructors.
 
 abstract class Special {
-    abstract void print(Node t, int n, boolean p);
+
+    private static final String _text = "$Special$";
+
+    public Special(){
+
+    }
+
     public void printIndentation(int n){
         for (int i = 0; i < n; i++)
             System.out.print(" ");
     }
+
+    void print(Node t, int n, boolean p) {
+        System.out.printf("%s",this.getText());
+        Node car = t.getCar();
+        Node cdr = t.getCdr();
+        if(car != null)car.print(n,p);
+        if(cdr != null)cdr.print(n,p);
+    }
+
+    public abstract String getText();
 }
 

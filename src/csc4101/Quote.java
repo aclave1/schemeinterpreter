@@ -3,12 +3,10 @@ package csc4101;
 import java.io.*;
 
 class Quote extends Special {
- 
-    // TODO: Add any fields needed.
+    private static final String text = "\'";
 
- 
-    // TODO: Add an appropriate constructor.
-
-    void print(Node t, int n, boolean p) {
+    @Override
+    public String getText() {
+        return text;
     }
 }

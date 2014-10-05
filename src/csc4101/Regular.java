@@ -7,7 +7,6 @@ class Regular extends Special {
 
     public Regular(Node _node){
         node = _node;
-
     }
     // TODO: Add any fields needed.
 
@@ -16,6 +15,10 @@ class Regular extends Special {
 
     void print(Node t, int n, boolean p) {
         printIndentation(n);
-        t.print(n,p);
+        node.print(n,p);
+    }
+    @Override
+    public String getText() {
+        return node.toString();
     }
 }

@@ -67,11 +67,26 @@ class Cons extends Node {
     }
 
     void print(int n) {
-        form.print(this, n, false);
+        print(n,true);
     }
 
     void print(int n, boolean p) {
+        boolean printRightParen = false;
+        if(car instanceof Cons) {
+            System.out.printf("(");
+            printRightParen = true;
+        }else{
+            System.out.printf(" ");
+        }
         form.print(this, n, p);
+
+        if(cdr != null && !(cdr instanceof Nil)){
+            cdr.print(n,p);
+        }
+        else if(cdr instanceof Nil && printRightParen){
+            cdr.print(n,p);
+        }
+
     }
 
 }
