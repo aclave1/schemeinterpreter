@@ -22,13 +22,11 @@ abstract class Special {
     void print(Node t, int n, boolean p) {
         System.out.printf("%s",this.getText());
         Node cdr = t.getCdr();
-        Node car = t.getCar();
 
         if(cdr != null){
             if(!(cdr instanceof Nil) && !(this instanceof Quote)) {
-                System.out.printf(" ");
+                System.out.printf(Keywords.SPACE);
             }
-            cdr.print(n,p);
         }
 
     }

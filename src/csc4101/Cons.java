@@ -70,12 +70,17 @@ class Cons extends Node {
 
     void print(int n, boolean p) {
         boolean printRightParen = false;
-        if(car instanceof Cons) {
+        if(this.car instanceof Cons) {
             System.out.printf("(");
             printRightParen = true;
         }
 
         form.print(this, n, p);
+        if(this.cdr != null && !(cdr instanceof Nil)){
+            this.cdr.print(n,printRightParen);
+        }else if(cdr instanceof Nil && printRightParen){
+            this.cdr.print(n,printRightParen);
+        }
 
 
     }
