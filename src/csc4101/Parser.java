@@ -64,7 +64,7 @@ class Parser {
         } else if (tokenType == TokenType.FALSE) {
             return new BooleanLit(false);
         } else if (tokenType == TokenType.QUOTE) {
-            return new Cons(new Ident("quote"),new Cons(parseExp(),new Nil()));
+            return new Cons(new Ident(Keywords.QUOTE),new Cons(parseExp(),new Nil()));
         }else{
             return null;
         }

@@ -29,7 +29,8 @@ class Node {
   void print(int n, boolean p) {
     print(n);
   }
-
+    protected Node car;
+    protected Node cdr;
   // For parsing Cons nodes, for printing trees, and later for
   // evaluating them, we need some helper functions that test
   // the type of a node and that extract some information.
@@ -46,16 +47,18 @@ class Node {
   // in class Cons.  After setCar, a Cons cell needs to be `parsed' again
   // using parseList.
   public Node getCar() {
-    return null;
+    return car;
   }
   
   public Node getCdr() {
-    return null;
+    return cdr;
   }
   
   public void setCar(Node a) {
+    car = a;
   }
   
   public void setCdr(Node d) {
+    cdr = d;
   }
 }

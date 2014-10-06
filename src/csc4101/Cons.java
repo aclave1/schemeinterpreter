@@ -3,8 +3,6 @@ package csc4101;
 import java.io.InvalidClassException;
 
 class Cons extends Node {
-    private Node car;
-    private Node cdr;
     private Special form;
 
     // parseList() `parses' special forms, constructs an appropriate
@@ -26,21 +24,21 @@ class Cons extends Node {
     private Special parseSpecial(Node n) {
         Ident i = (Ident)n;
         String name = i.getName();
-        if( name.equals("quote")){
+        if( name.equals(Keywords.QUOTE)){
             return new Quote();
-        }else if(name.equals("lambda")){
+        }else if(name.equals(Keywords.LAMBDA)){
             return new Lambda();
-        }else if(name.equals("begin")){
+        }else if(name.equals(Keywords.BEGIN)){
             return new Begin();
-        }else if(name.equals("if")){
+        }else if(name.equals(Keywords.IF)){
             return new If();
-        }else if(name.equals("let")){
+        }else if(name.equals(Keywords.LET)){
             return new Let();
-        }else if(name.equals("cond")){
+        }else if(name.equals(Keywords.COND)){
             return new Cond();
-        }else if(name.equals("define")){
+        }else if(name.equals(Keywords.DEFINE)){
             return new Define();
-        }else if(name.equals("set!")){
+        }else if(name.equals(Keywords.SET)){
             return new Set();
         }else{
             return new Regular(n);
@@ -75,17 +73,10 @@ class Cons extends Node {
         if(car instanceof Cons) {
             System.out.printf("(");
             printRightParen = true;
-        }else{
-            System.out.printf(" ");
         }
+
         form.print(this, n, p);
 
-        if(cdr != null && !(cdr instanceof Nil)){
-            cdr.print(n,p);
-        }
-        else if(cdr instanceof Nil && printRightParen){
-            cdr.print(n,p);
-        }
 
     }
 

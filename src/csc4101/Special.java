@@ -21,10 +21,16 @@ abstract class Special {
 
     void print(Node t, int n, boolean p) {
         System.out.printf("%s",this.getText());
-        Node car = t.getCar();
         Node cdr = t.getCdr();
-        if(car != null)car.print(n,p);
-        if(cdr != null)cdr.print(n,p);
+        Node car = t.getCar();
+
+        if(cdr != null){
+            if(!(cdr instanceof Nil) && !(this instanceof Quote)) {
+                System.out.printf(" ");
+            }
+            cdr.print(n,p);
+        }
+
     }
 
     public abstract String getText();
