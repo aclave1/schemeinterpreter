@@ -36,7 +36,7 @@ class Node {
   // the type of a node and that extract some information.
 
   // TODO: implement these in the appropriate subclasses to return TRUE.
-  public boolean isBoolean()   { return false; }  // BooleanLit
+  public boolean isBoolean(){ return false; }  // BooleanLit
   public boolean isNumber() { return false; }  // IntLit
   public boolean isString() { return false; }  // StringLit
   public boolean isSymbol() { return false; }  // Ident
