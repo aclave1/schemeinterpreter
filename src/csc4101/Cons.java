@@ -5,6 +5,15 @@ import java.io.InvalidClassException;
 class Cons extends Node {
     private Special form;
 
+
+    /**
+     * Distinguishes between a cons node from a paren
+     * explicitly typed in the user's code,
+     * and an implicit cons node in the tree which is not to be printed.
+     * */
+    private boolean printMe = false;
+
+
     // parseList() `parses' special forms, constructs an appropriate
     // object of a subclass of Special, and stores a pointer to that
     // object in variable form.  It would be possible to fully parse
@@ -61,6 +70,14 @@ class Cons extends Node {
     public Cons(Node a, Node d) {
         car = a;
         cdr = d;
+        printMe = false;
+        parseList(car);
+    }
+
+    public Cons(Node a, Node d,boolean b) {
+        car = a;
+        cdr = d;
+        printMe = b;
         parseList(car);
     }
 
@@ -70,9 +87,17 @@ class Cons extends Node {
 
     void print(int n, boolean p) {
         boolean printRightParen = p;
+
+        printIndentation(n);
+        if(this.printMe){
+            printRightParen = this.printMe;
+            System.out.printf("(");
+        }
+
+
         //start of a list
         if(this.car instanceof Cons) {
-            System.out.printf("(");
+            //System.out.printf("(");
             form.print(this, n, true);
         }//empty list
         else if(this.car instanceof Nil){
@@ -89,8 +114,6 @@ class Cons extends Node {
         else if(this.cdr instanceof Nil && printRightParen){
             this.cdr.print(n,printRightParen);
         }
-
-
 
     }
 

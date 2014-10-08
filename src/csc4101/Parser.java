@@ -52,7 +52,7 @@ class Parser {
         int tokenType = token.getType();
 
         if (tokenType == TokenType.LPAREN) {
-            return parseRest();
+            return parseRest(true);
         } else if (tokenType == TokenType.IDENT) {
             return new Ident(token.getName());
         } else if (tokenType == TokenType.INT) {
@@ -70,8 +70,13 @@ class Parser {
         }
     }
 
-    protected Node parseRest() {
-
+    protected Node parseRest(){
+        return parseRest(false);
+    }
+    /**
+     * @param printCons was the paren explicitly typed?
+     * */
+    protected Node parseRest(boolean printCons) {
         Token token = scanner.getNextToken();
         int tokenType = token.getType();
 
@@ -80,7 +85,9 @@ class Parser {
         }else if(tokenType == TokenType.RPAREN){
             return new Nil();
         }else{
-            return new Cons(parseExp(token),parseRest());
+            //explicitly typed paren
+            return new Cons(parseExp(token),parseRest(),printCons);
         }
+
     }
 };

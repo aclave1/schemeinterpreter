@@ -60,7 +60,9 @@ public class Main {
 	// Parse and pretty-print each input expression
 	root = parser.parseExp();
 	//while (root != null) {
+        System.out.printf(">");
 	    root.print(0);
+        System.out.printf("\n");
 	    //root = parser.parseExp();
 	//}
 	System.exit(0);
