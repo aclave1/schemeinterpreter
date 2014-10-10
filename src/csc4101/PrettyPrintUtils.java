@@ -25,17 +25,26 @@ public class PrettyPrintUtils {
             if(t.car instanceof Cons){
                 printIndentation(n);
                 t.car.print(n,p);
+                //printSubsequentIndented(t.car,n,p);
             }else if(t instanceof Nil){
                 int newIndentation = n - Constants.INDENTATION;
                 printIndentation(newIndentation);
                 t.print(newIndentation,p);
             }else{
                 printIndentation(n);
-                t.print(n,p);
+                if(t.car instanceof Nil){
+                    t.car.print(n,false);
+                }else{
+                    t.car.print(n,p);
+                }
             }
             System.out.printf("\n");
             t = t.cdr;
         }
+    }
+
+    public static void printFistElementOnSameLine(Node t, int n, boolean p){
+
     }
 
 

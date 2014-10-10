@@ -22,7 +22,9 @@ abstract class Special {
 
     protected void printSpaceAfter(Node cdr) {
 
-        if (PrettyPrintUtils.handlesIndentation(this) ||
+        if (
+
+            (PrettyPrintUtils.handlesIndentation(this) && !printsFirstElOnSameLine(this)) ||
             (cdr == null) ||
             (cdr instanceof Nil) ||
             (this instanceof Quote)){
@@ -31,6 +33,11 @@ abstract class Special {
         System.out.printf(Constants.SPACE);
     }
 
+    private boolean printsFirstElOnSameLine(Special t){
+        return (t instanceof If ||
+                t instanceof Lambda ||
+                t instanceof Define);
+    }
 
     public abstract String getText();
 }

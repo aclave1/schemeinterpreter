@@ -92,14 +92,11 @@ class Cons extends Node {
             System.out.printf("(");
         }
 
-        //start of a list
         if(PrettyPrintUtils.handlesIndentation(form)){
             form.print(this, n,printRightParen);
-
             return;
         }
         else if(this.car instanceof Cons) {
-            //System.out.printf("(");
             form.print(this, n, true);
         }//empty list
         else if(this.car instanceof Nil){

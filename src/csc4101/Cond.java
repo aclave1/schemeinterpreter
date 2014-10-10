@@ -6,4 +6,10 @@ class Cond extends Special {
     public String getText() {
         return text;
     }
+    @Override
+    public void print(Node t, int n, boolean p){
+        super.print(t, n, p);
+        int newIndentation = n + Constants.INDENTATION;
+        PrettyPrintUtils.printSubsequentIndented(t.cdr,newIndentation,p);
+    }
 }
