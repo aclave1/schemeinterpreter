@@ -7,8 +7,7 @@ class Cons extends Node {
 
 
     /**
-     * Distinguishes between a cons node from a paren
-     * explicitly typed in the user's code,
+     * Distinguishes between a cons node from a paren explicitly typed in the user's code,
      * and an implicit cons node in the tree which is not to be printed.
      * */
     private boolean printMe = false;
@@ -88,7 +87,6 @@ class Cons extends Node {
     void print(int n, boolean p) {
         boolean printRightParen = p;
 
-        printIndentation(n);
         if(this.printMe){
             printRightParen = this.printMe;
             System.out.printf("(");
@@ -97,16 +95,17 @@ class Cons extends Node {
 
         //start of a list
         if(this.car instanceof Cons) {
-            //System.out.printf("(");
             form.print(this, n, true);
         }//empty list
         else if(this.car instanceof Nil){
             form.print(this,n,false);
-        }//regular
+        }
         else{
             form.print(this, n, printRightParen);
         }
 
+        //node which needs to handle indentation already has
+        if(PrettyPrintUtils.handlesIndentation(form)) return;
         //regular cdr
         if(this.cdr != null && !(cdr instanceof Nil)){
             this.cdr.print(n,printRightParen);
@@ -116,5 +115,10 @@ class Cons extends Node {
         }
 
     }
+
+
+
+
+
 
 }

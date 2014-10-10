@@ -13,8 +13,15 @@ abstract class Special {
     }
 
     public void printIndentation(int n) {
-        for (int i = 0; i < n; i++)
-            System.out.print(Keywords.SPACE);
+
+        for (int i = 0; i < n; i++) {
+            System.out.print(Constants.SPACE);
+        }
+
+        /**
+         * more efficient, but the space constant cannot be changed to another character for debugging.
+         * System.out.printf("%"+n+"s","");
+         */
     }
 
     void print(Node t, int n, boolean p) {
@@ -24,10 +31,14 @@ abstract class Special {
     }
 
     protected void printSpaceAfter(Node cdr) {
-        if ((cdr == null) || (cdr instanceof Nil) || (this instanceof Quote)) {
-            return;
+
+        if (PrettyPrintUtils.handlesIndentation(this) ||
+            (cdr == null) ||
+            (cdr instanceof Nil) ||
+            (this instanceof Quote)){
+                return;
         }
-        System.out.printf(Keywords.SPACE);
+        System.out.printf(Constants.SPACE);
     }
 
 

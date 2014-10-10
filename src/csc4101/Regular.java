@@ -12,14 +12,14 @@ class Regular extends Special {
     void print(Node t, int n, boolean p) {
         Node tCdr = t.getCdr();
 
-        printIndentation(n);
+        //printIndentation(n);
 
         node.print(n,p);
 
         if(tCdr == null)return;
 
         if(!(tCdr instanceof Nil)){
-            System.out.printf(Keywords.SPACE);
+            System.out.printf(Constants.SPACE);
         }
     }
     @Override

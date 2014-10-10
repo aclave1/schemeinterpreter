@@ -9,6 +9,5 @@ public class Keywords {
     public static final String BEGIN = "begin";
     public static final String QUOTE = "\'";
     public static final String SET = "set!";
-    public static final String SPACE = " ";
 
 }
