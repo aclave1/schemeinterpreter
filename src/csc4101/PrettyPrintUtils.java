@@ -1,13 +1,42 @@
 package csc4101;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 /**
  * Created by al on 10/9/14.
  */
 public class PrettyPrintUtils {
-    public static void printIndentation(int n){
+    public static void printIndentation(int n) {
 
+        for (int i = 0; i < n; i++) {
+            System.out.print(Constants.SPACE);
+        }
+
+        /**
+         * more efficient, but the space constant cannot be changed to another character for debugging.
+         * System.out.printf("%"+n+"s","");
+         */
     }
 
+    public static void printSubsequentIndented(Node t, int n, boolean p) {
+
+        if(t == null) return;
+        while(t != null){
+            if(t.car instanceof Cons){
+                printIndentation(n);
+                t.car.print(n,p);
+            }else if(t instanceof Nil){
+                int newIndentation = n - Constants.INDENTATION;
+                printIndentation(newIndentation);
+                t.print(newIndentation,p);
+            }else{
+                printIndentation(n);
+                t.print(n,p);
+            }
+            System.out.printf("\n");
+            t = t.cdr;
+        }
+    }
 
 
     /***

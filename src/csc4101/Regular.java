@@ -17,10 +17,9 @@ class Regular extends Special {
         node.print(n,p);
 
         if(tCdr == null)return;
+        printSpaceAfter(tCdr);
+//        tCdr.print(n,p);
 
-        if(!(tCdr instanceof Nil)){
-            System.out.printf(Constants.SPACE);
-        }
     }
     @Override
     public String getText() {

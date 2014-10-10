@@ -5,5 +5,5 @@ package csc4101;
  */
 public class Constants {
     public static final int INDENTATION = 2;
-    public static final String SPACE = " ";
+    public static final String SPACE = ".";
 }

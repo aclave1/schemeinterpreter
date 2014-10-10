@@ -9,7 +9,7 @@ class Cons extends Node {
     /**
      * Distinguishes between a cons node from a paren explicitly typed in the user's code,
      * and an implicit cons node in the tree which is not to be printed.
-     * */
+     */
     private boolean printMe = false;
 
 
@@ -21,42 +21,42 @@ class Cons extends Node {
     // parseList only look at the car for selecting the appropriate
     // object from the Special hierarchy and to leave the rest of
     // parsing up to the interpreter.
-    void parseList(Node n){
-        if(isRegular(n)){
+    void parseList(Node n) {
+        if (isRegular(n)) {
             form = new Regular(n);
-        }else{
+        } else {
             form = parseSpecial(n);
         }
     }
 
     private Special parseSpecial(Node n) {
-        Ident i = (Ident)n;
+        Ident i = (Ident) n;
         String name = i.getName();
-        if( name.equals(Keywords.QUOTE)){
+        if (name.equals(Keywords.QUOTE)) {
             return new Quote();
-        }else if(name.equals(Keywords.LAMBDA)){
+        } else if (name.equals(Keywords.LAMBDA)) {
             return new Lambda();
-        }else if(name.equals(Keywords.BEGIN)){
+        } else if (name.equals(Keywords.BEGIN)) {
             return new Begin();
-        }else if(name.equals(Keywords.IF)){
+        } else if (name.equals(Keywords.IF)) {
             return new If();
-        }else if(name.equals(Keywords.LET)){
+        } else if (name.equals(Keywords.LET)) {
             return new Let();
-        }else if(name.equals(Keywords.COND)){
+        } else if (name.equals(Keywords.COND)) {
             return new Cond();
-        }else if(name.equals(Keywords.DEFINE)){
+        } else if (name.equals(Keywords.DEFINE)) {
             return new Define();
-        }else if(name.equals(Keywords.SET)){
+        } else if (name.equals(Keywords.SET)) {
             return new Set();
-        }else{
+        } else {
             return new Regular(n);
         }
     }
 
     /**
      * Is regular and not an Ident
-     * */
-    private boolean isRegular(Node n){
+     */
+    private boolean isRegular(Node n) {
         return (n instanceof IntLit ||
                 n instanceof StrLit ||
                 n instanceof BooleanLit ||
@@ -73,7 +73,7 @@ class Cons extends Node {
         parseList(car);
     }
 
-    public Cons(Node a, Node d,boolean b) {
+    public Cons(Node a, Node d, boolean b) {
         car = a;
         cdr = d;
         printMe = b;
@@ -81,7 +81,7 @@ class Cons extends Node {
     }
 
     void print(int n) {
-        print(n,false);
+        print(n, false);
     }
 
     void print(int n, boolean p) {
@@ -92,20 +92,23 @@ class Cons extends Node {
             System.out.printf("(");
         }
 
-
         //start of a list
-        if(this.car instanceof Cons) {
+        if(PrettyPrintUtils.handlesIndentation(form)){
+            form.print(this, n,printRightParen);
+
+            return;
+        }
+        else if(this.car instanceof Cons) {
+            //System.out.printf("(");
             form.print(this, n, true);
         }//empty list
         else if(this.car instanceof Nil){
             form.print(this,n,false);
-        }
+        }//regular
         else{
             form.print(this, n, printRightParen);
         }
 
-        //node which needs to handle indentation already has
-        if(PrettyPrintUtils.handlesIndentation(form)) return;
         //regular cdr
         if(this.cdr != null && !(cdr instanceof Nil)){
             this.cdr.print(n,printRightParen);
@@ -114,11 +117,8 @@ class Cons extends Node {
             this.cdr.print(n,printRightParen);
         }
 
+
     }
-
-
-
-
 
 
 }
