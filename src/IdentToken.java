@@ -1,5 +1,3 @@
-package csc4101;
-
 public class IdentToken extends Token {
   private String name;
 

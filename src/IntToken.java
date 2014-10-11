@@ -1,5 +1,3 @@
-package csc4101;
-
 public class IntToken extends Token {
   private int intVal;
 

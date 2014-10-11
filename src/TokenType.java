@@ -1,4 +1,3 @@
-package csc4101;// For backward compatibility with Java 1.4, we use explicit constant
 // declarations.  Java 1.5 would now have an enum construct.
 
 interface TokenType {

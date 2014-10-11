@@ -1,7 +1,3 @@
-package csc4101;
-
-import java.io.InvalidClassException;
-
 class Cons extends Node {
     private Special form;
     public String text = Keywords.LPAREN;

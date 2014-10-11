@@ -1,5 +1,3 @@
-package csc4101;
-
 public class Keywords {
     public static final String DEFINE = "define";
     public static final String LAMBDA = "lambda";

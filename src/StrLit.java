@@ -1,6 +1,3 @@
-package csc4101;
-
-import java.io.*;
 class StrLit extends Node {
   private String strVal;
 

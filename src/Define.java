@@ -1,7 +1,3 @@
-package csc4101;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 class Define extends Special {
     private static final String text = "define";
 

@@ -1,6 +1,3 @@
-package csc4101;
-
-import java.io.*;
 class Nil extends Node {
     public String rparen = ")";
     public String parens = "()";

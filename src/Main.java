@@ -1,5 +1,3 @@
-package csc4101;// Main.java -- the main program
-
 import java.io.*;
 
 public class Main {
@@ -41,12 +39,12 @@ public class Main {
             }
         }
         // create scanner that reads from standard input
-        Scanner scanner = new Scanner(System.in);
+        TokenScanner tokenScanner = new TokenScanner(System.in);
 
 
         if (debugScanner == true) {
             // debug scanner
-            Token tok = scanner.getNextToken();
+            Token tok = tokenScanner.getNextToken();
             while (tok != null) {
                 int tt = tok.getType();
                 System.out.print(TokenName[tt]);
@@ -58,12 +56,12 @@ public class Main {
                     System.out.println(", name = " + tok.getName());
                 else
                     System.out.println();
-                tok = scanner.getNextToken();
+                tok = tokenScanner.getNextToken();
             }
         }
 
         // Create parser
-        Parser parser = new Parser(scanner);
+        Parser parser = new Parser(tokenScanner);
 
         // Parse and pretty-print each input expression
         Node root = parser.parseExp();

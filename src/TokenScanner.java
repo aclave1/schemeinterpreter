@@ -1,20 +1,14 @@
-package csc4101;// Scanner.java -- the implementation of class Scanner
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.IllegalFormatException;
 
-public class Scanner {
+public class TokenScanner {
     private PushbackInputStream in;
     private final int bufSize = 1000;
     private final int intSize = 20;
     private byte[] buf = new byte[bufSize];
 
 
-    public Scanner(InputStream i) {
+    public TokenScanner(InputStream i) {
         in = new PushbackInputStream(i);
     }
 

@@ -1,4 +1,3 @@
-package csc4101;// Parser.java -- the implementation of class Parser
 //
 // Defines
 //
@@ -33,17 +32,15 @@ package csc4101;// Parser.java -- the implementation of class Parser
 // parser discards the offending token (which probably was a DOT
 // or an RPAREN) and attempts to continue parsing with the next token.
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 class Parser {
-    private Scanner scanner;
+    private TokenScanner tokenScanner;
 
-    public Parser(Scanner s) {
-        scanner = s;
+    public Parser(TokenScanner s) {
+        tokenScanner = s;
     }
 
     public Node parseExp() {
-        Token token = scanner.getNextToken();
+        Token token = tokenScanner.getNextToken();
         return parseExp(token);
     }
 
@@ -79,7 +76,7 @@ class Parser {
      * @param printCons was the paren explicitly typed?
      * */
     protected Node parseRest(boolean printCons) {
-        Token token = scanner.getNextToken();
+        Token token = tokenScanner.getNextToken();
         if(token == null) return null;
         int tokenType = token.getType();
 

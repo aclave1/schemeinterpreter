@@ -1,7 +1,3 @@
-package csc4101;
-
-import java.io.*;
-
 class BooleanLit extends Node {
     private boolean booleanVal;
 

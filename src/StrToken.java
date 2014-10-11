@@ -1,5 +1,3 @@
-package csc4101;
-
 public class StrToken extends Token {
   private String strVal;
 

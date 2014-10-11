@@ -1,5 +1,3 @@
-package csc4101;
-
 public class Token implements TokenType {
   private int tt;
 

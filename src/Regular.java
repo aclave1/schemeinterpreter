@@ -1,7 +1,3 @@
-package csc4101;
-
-import java.io.*;
-
 class Regular extends Special {
     public Node node;
 

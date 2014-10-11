@@ -1,6 +1,3 @@
-package csc4101;
-
-import java.io.*;
 class Ident extends Node {
   private String name;
 

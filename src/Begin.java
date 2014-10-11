@@ -1,11 +1,11 @@
-package csc4101;
+class Begin extends Special {
+    private static final String text = "begin\n";
 
-class Cond extends Special {
-    private static final String text = "cond\n";
     @Override
     public String getText() {
         return text;
     }
+
     @Override
     public void print(Node t, int n, boolean p){
         super.print(t, n, p);
