@@ -1,18 +1,24 @@
 package csc4101;
 
 import java.io.*;
+
 class BooleanLit extends Node {
-  private boolean booleanVal;
+    private boolean booleanVal;
 
-  public BooleanLit(boolean b) {
-    booleanVal = b;
-  }
-
-  public void print(int n) {
-    if (booleanVal) {
-      System.out.println("#t");
-    } else {
-      System.out.println("#f");
+    public BooleanLit(boolean b) {
+        booleanVal = b;
     }
-  }
+
+    public void print(int n) {
+        if (booleanVal) {
+            System.out.println("#t");
+        } else {
+            System.out.println("#f");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return booleanVal ? "#t" : "#f";
+    }
 }

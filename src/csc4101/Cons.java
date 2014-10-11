@@ -4,7 +4,7 @@ import java.io.InvalidClassException;
 
 class Cons extends Node {
     private Special form;
-
+    public String text = Keywords.LPAREN;
 
     /**
      * Distinguishes between a cons node from a paren explicitly typed in the user's code,
@@ -30,6 +30,7 @@ class Cons extends Node {
     }
 
     private Special parseSpecial(Node n) {
+        if(n == null) return null;
         Ident i = (Ident) n;
         String name = i.getName();
         if (name.equals(Keywords.QUOTE)) {
@@ -85,11 +86,12 @@ class Cons extends Node {
     }
 
     void print(int n, boolean p) {
+        if(form == null || this.cdr == null) return;
         boolean printRightParen = p;
 
         if(this.printMe){
             printRightParen = this.printMe;
-            System.out.printf("(");
+            System.out.printf(this.text);
         }
 
         if(PrettyPrintUtils.handlesIndentation(form)){
@@ -114,8 +116,14 @@ class Cons extends Node {
             this.cdr.print(n,printRightParen);
         }
 
-
     }
+
+
+    @Override
+    public String toString(){
+        return text;
+    }
+
 
 
 }

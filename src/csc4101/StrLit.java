@@ -9,4 +9,9 @@ class StrLit extends Node {
   public void print(int n) {
     System.out.printf("\"%s\"",strVal);
   }
+
+    @Override
+    public String toString(){
+        return strVal;
+    }
 }

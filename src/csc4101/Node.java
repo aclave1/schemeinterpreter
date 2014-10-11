@@ -6,9 +6,14 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.io.*;
 
 class Node {
+
+  public String text = "$";
+
   // The argument of print(int) is the number of characters to indent.
   // Every subclass of Node must implement print(int).
-  void print(int n) {}
+  void print(int n) {
+      System.out.printf(text);
+  }
 
   // The first argument of print(int, boolean) is the number of characters
   // to indent.  It is interpreted the same as for print(int).
@@ -34,17 +39,14 @@ class Node {
   // evaluating them, we need some helper functions that test
   // the type of a node and that extract some information.
 
-  // TODO: implement these in the appropriate subclasses to return TRUE.
-  public boolean isBoolean(){ return false; }  // BooleanLit
-  public boolean isNumber() { return false; }  // IntLit
-  public boolean isString() { return false; }  // StringLit
-  public boolean isSymbol() { return false; }  // Ident
-  public boolean isNull()   { return false; }  // nil
-  public boolean isPair()   { return false; }  // Cons
+  public boolean isBoolean(){ throw new NotImplementedException(); }  // BooleanLit
+  public boolean isNumber() { throw new NotImplementedException(); }  // IntLit
+  public boolean isString() { throw new NotImplementedException(); }  // StringLit
+  public boolean isSymbol() { throw new NotImplementedException(); }  // Ident
+  public boolean isNull()   { throw new NotImplementedException(); }  // nil
+  public boolean isPair()   { throw new NotImplementedException(); }  // Cons
 
-  // TODO: Report an error in these default methods and implement them
-  // in class Cons.  After setCar, a Cons cell needs to be `parsed' again
-  // using parseList.
+
   public Node getCar() {
     return car;
   }

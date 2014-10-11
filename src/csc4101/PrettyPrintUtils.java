@@ -20,56 +20,59 @@ public class PrettyPrintUtils {
 
     public static void printSubsequentIndented(Node t, int n, boolean p) {
 
-        if(t == null) return;
-        while(t != null){
-            if(t.car instanceof Cons){
+        if (t == null) return;
+        while (t != null) {
+            //remove t.car.car check to make it print like the provided binary
+            if (t.car instanceof Cons && t.car.car instanceof Cons) {
                 printIndentation(n);
-                t.car.print(n,p);
-                //printSubsequentIndented(t.car,n,p);
-            }else if(t instanceof Nil){
+                System.out.printf(t.car.toString());
+                //t.car.car.print(n,p);
+                System.out.printf("\n");
+                printSubsequentIndented(t.car, n + Constants.INDENTATION, p);
+            } else if (t instanceof Nil) {
                 int newIndentation = n - Constants.INDENTATION;
                 printIndentation(newIndentation);
-                t.print(newIndentation,p);
-            }else{
+                t.print(newIndentation, p);
+                System.out.printf("\n");
+            } else {
                 printIndentation(n);
-                if(t.car instanceof Nil){
-                    t.car.print(n,false);
-                }else{
-                    t.car.print(n,p);
+                if (t.car instanceof Nil) {
+                    t.car.print(n, false);
+                } else {
+                    t.car.print(n, p);
                 }
+                System.out.printf("\n");
             }
-            System.out.printf("\n");
             t = t.cdr;
         }
     }
 
-    public static void printFirstElementOnSameLine(Node t, int n, boolean p){
+    public static void printFirstElementOnSameLine(Node t, int n, boolean p) {
         Node firstLine = t.cdr.car;
-        firstLine.print(n,p);
+        firstLine.print(n, p);
         System.out.printf("\n");
         Node secondLine = t.cdr.cdr;
         n += Constants.INDENTATION;
-        printSubsequentIndented(secondLine,n,p);
+        printSubsequentIndented(secondLine, n, p);
     }
 
 
-    /***
+    /**
      * Should this Special handle subsequent indentation?
-     *
+     * <p/>
      * For example:
      * (begin <- handles subsequent indentation
-     *      (+ 1 2)
+     * (+ 1 2)
      * )
-     *
-     * */
-    public static boolean handlesIndentation(Special s){
+     */
+    public static boolean handlesIndentation(Special s) {
         return (s instanceof Begin ||
                 s instanceof If ||
                 s instanceof Let ||
                 s instanceof Cond ||
                 s instanceof Lambda ||
                 s instanceof Define
-                );
+        );
     }
 
 

@@ -12,4 +12,8 @@ class Ident extends Node {
     public void print(int n) {
     System.out.printf("%s",name);
   }
+    @Override
+    public String toString(){
+        return name;
+    }
 }

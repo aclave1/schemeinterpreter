@@ -9,4 +9,8 @@ class IntLit extends Node {
   public void print(int n) {
     System.out.printf("%d",intVal);
   }
+    @Override
+    public String toString(){
+        return Integer.toString(intVal);
+    }
 }
