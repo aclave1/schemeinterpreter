@@ -7,9 +7,9 @@ class BooleanLit extends Node {
 
     public void print(int n) {
         if (booleanVal) {
-            System.out.println("#t");
+            System.out.printf("#t");
         } else {
-            System.out.println("#f");
+            System.out.printf("#f");
         }
     }
 

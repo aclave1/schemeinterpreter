@@ -1,5 +1,3 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 class Node {
 
   public String text = "$";
@@ -34,12 +32,12 @@ class Node {
   // evaluating them, we need some helper functions that test
   // the type of a node and that extract some information.
 
-  public boolean isBoolean(){ throw new NotImplementedException(); }  // BooleanLit
-  public boolean isNumber() { throw new NotImplementedException(); }  // IntLit
-  public boolean isString() { throw new NotImplementedException(); }  // StringLit
-  public boolean isSymbol() { throw new NotImplementedException(); }  // Ident
-  public boolean isNull()   { throw new NotImplementedException(); }  // nil
-  public boolean isPair()   { throw new NotImplementedException(); }  // Cons
+  public boolean isBoolean(){ return false; }  // BooleanLit
+  public boolean isNumber() { return false; }  // IntLit
+  public boolean isString() { return false; }  // StringLit
+  public boolean isSymbol() { return false; }  // Ident
+  public boolean isNull()   { return false; }  // nil
+  public boolean isPair()   { return false; }  // Cons
 
 
   public Node getCar() {
