@@ -21,9 +21,7 @@ abstract class Special {
     }
 
     protected void printSpaceAfter(Node cdr) {
-
         if (
-
             (PrettyPrintUtils.handlesIndentation(this) && !printsFirstElOnSameLine(this)) ||
             (cdr == null) ||
             (cdr instanceof Nil) ||
@@ -33,6 +31,21 @@ abstract class Special {
         System.out.printf(Constants.SPACE);
     }
 
+    /**
+     * These forms print their text and the next element on the same line,
+     * then indenting subsequent lines, for example:
+     *
+     *     first element
+     *     |     |
+     *     v     v
+     * (if (= n 0)
+     *     1
+     *     (* n (fac (- n 1)))
+     * )
+     *     ^
+     *     indented by 4 spaces
+     *
+     * */
     private boolean printsFirstElOnSameLine(Special t){
         return (t instanceof If ||
                 t instanceof Lambda ||

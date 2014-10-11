@@ -49,6 +49,7 @@ class Parser {
 
     public Node parseExp(Token token) {
 
+        if(token == null) return null;
         int tokenType = token.getType();
 
         if (tokenType == TokenType.LPAREN) {
@@ -79,6 +80,7 @@ class Parser {
      * */
     protected Node parseRest(boolean printCons) {
         Token token = scanner.getNextToken();
+        if(token == null) return null;
         int tokenType = token.getType();
 
         if(tokenType == TokenType.DOT){

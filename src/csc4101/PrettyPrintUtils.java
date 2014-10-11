@@ -43,8 +43,13 @@ public class PrettyPrintUtils {
         }
     }
 
-    public static void printFistElementOnSameLine(Node t, int n, boolean p){
-
+    public static void printFirstElementOnSameLine(Node t, int n, boolean p){
+        Node firstLine = t.cdr.car;
+        firstLine.print(n,p);
+        System.out.printf("\n");
+        Node secondLine = t.cdr.cdr;
+        n += Constants.INDENTATION;
+        printSubsequentIndented(secondLine,n,p);
     }
 
 
