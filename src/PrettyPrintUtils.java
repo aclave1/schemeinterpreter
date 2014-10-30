@@ -22,7 +22,6 @@ public class PrettyPrintUtils {
             if (t.car instanceof Cons && t.car.car instanceof Cons) {
                 printIndentation(n);
                 System.out.printf(t.car.toString());
-                //t.car.car.print(n,p);
                 System.out.printf("\n");
                 printSubsequentIndented(t.car, n + Constants.INDENTATION, p);
             } else if (t instanceof Nil) {
@@ -67,8 +66,7 @@ public class PrettyPrintUtils {
                 s instanceof Let ||
                 s instanceof Cond ||
                 s instanceof Lambda ||
-                s instanceof Define
-        );
+                s instanceof Define);
     }
 
 

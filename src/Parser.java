@@ -46,47 +46,47 @@ class Parser {
 
     public Node parseExp(Token token) {
 
-        if(token == null) return null;
+        if (token == null) return null;
         int tokenType = token.getType();
 
         if (tokenType == TokenType.LPAREN) {
             return parseRest(true);
         } else if (tokenType == TokenType.IDENT) {
             return new Ident(token.getName());
-        } else if (tokenType == TokenType.INT) {
-            return new IntLit(token.getIntVal());
-        } else if (tokenType == TokenType.STRING) {
-            return new StrLit(token.getStrVal());
+        } else if (tokenType == TokenType.QUOTE) {
+            return new Cons(new Ident(Keywords.QUOTE), new Cons(parseExp(), new Nil()));
         } else if (tokenType == TokenType.TRUE) {
             return new BooleanLit(true);
         } else if (tokenType == TokenType.FALSE) {
             return new BooleanLit(false);
-        } else if (tokenType == TokenType.QUOTE) {
-            return new Cons(new Ident(Keywords.QUOTE),new Cons(parseExp(),new Nil()));
-        }else{
+        } else if (tokenType == TokenType.INT) {
+            return new IntLit(token.getIntVal());
+        } else if (tokenType == TokenType.STRING) {
+            return new StrLit(token.getStrVal());
+        } else {
             return null;
         }
     }
 
-    protected Node parseRest(){
+    protected Node parseRest() {
         return parseRest(false);
     }
 
     /**
      * @param printCons was the paren explicitly typed?
-     * */
+     */
     protected Node parseRest(boolean printCons) {
         Token token = tokenScanner.getNextToken();
-        if(token == null) return null;
+        if (token == null) return null;
         int tokenType = token.getType();
 
-        if(tokenType == TokenType.DOT){
-            return new Cons(parseExp(),parseRest());
-        }else if(tokenType == TokenType.RPAREN){
+        if (tokenType == TokenType.DOT) {
+            return new Cons(parseExp(), parseRest());
+        } else if (tokenType == TokenType.RPAREN) {
             return new Nil();
-        }else{
+        } else {
             //explicitly typed paren
-            return new Cons(parseExp(token),parseRest(),printCons);
+            return new Cons(parseExp(token), parseRest(), printCons);
         }
 
     }

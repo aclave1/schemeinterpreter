@@ -107,7 +107,8 @@ class Cons extends Node {
         //regular cdr
         if(this.cdr != null && !(cdr instanceof Nil)){
             this.cdr.print(n,printRightParen);
-        }//end of a list
+        }
+        //end of a list
         else if(this.cdr instanceof Nil && printRightParen){
             this.cdr.print(n,printRightParen);
         }
