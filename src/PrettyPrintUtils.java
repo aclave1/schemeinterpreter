@@ -4,14 +4,14 @@
 public class PrettyPrintUtils {
     public static void printIndentation(int n) {
 
-        for (int i = 0; i < n; i++) {
-            System.out.print(Constants.SPACE);
-        }
+//        for (int i = 0; i < n; i++) {
+//            System.out.print(Constants.SPACE);
+//        }
 
         /**
          * more efficient, but the space constant cannot be changed to another character for debugging.
-         * System.out.printf("%"+n+"s","");
-         */
+         * */
+        System.out.printf("%" + n + "s", "");
     }
 
     public static void printSubsequentIndented(Node t, int n, boolean p) {

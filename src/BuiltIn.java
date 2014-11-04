@@ -20,8 +20,7 @@ class BuiltIn extends Node {
 
     public Node getSymbol()		{ return symbol; }
 
-    // TODO: The method isProcedure() should be defined in
-    // class Node to return false.
+
     public boolean isProcedure()	{ return true; }
 
     public void print(int n) {
@@ -35,9 +34,7 @@ class BuiltIn extends Node {
 	System.out.println('}');
     }
 
-    // TODO: The method apply() should be defined in class Node
-    // to report an error.  It should be overwritten only in classes
-    // BuiltIn and Closure.
+    //TODO: apply for Builtin and closure
     public Node apply (Node args) {
 	return null;
     }

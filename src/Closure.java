@@ -25,18 +25,18 @@ class Closure extends Node {
 
     public void print(int n) {
 	// there got to be a more efficient way to print n spaces
-	for (int i = 0; i < n; i++)
-	    System.out.print(' ');
+	for (int i = 0; i < n; i++) {
+        System.out.print(' ');
+    }
 	System.out.println("#{Procedure");
 	fun.print(n+3);
-	for (int i = 0; i < n; i++)
-	    System.out.print(' ');
+	for (int i = 0; i < n; i++) {
+        System.out.print(' ');
+    }
 	System.out.println('}');
     }
 
-    // TODO: The method apply() should be defined in class Node
-    // to report an error.  It should be overwritten only in classes
-    // BuiltIn and Closure.
+    //TODO: apply for Builtin and closure
     public Node apply (Node args) {
 	return null;
     }

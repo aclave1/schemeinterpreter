@@ -31,68 +31,77 @@
 //      if it doesn't exist, perform the assignment in the enclosing scope
 //      if we don't find the name, it is an error
 
+import java.security.MessageDigest;
+
 class Environment extends Node {
 
     // An Environment is implemented like a Cons node, in which
     // every list element (every frame) is an association list.
     // Instead of Nil(), we use null to terminate the list.
 
-    private Node scope;		// the innermost scope, an association list
-    private Environment env;	// the enclosing environment
+    private Frame scope;        // the innermost scope, an association list
+    private Environment env;    // the enclosing environment
 
-    public Environment()		{ scope = new Nil();  env = null; }
-    public Environment(Environment e)	{ scope = new Nil();  env = e; }
+    public Environment() {
+        this(null);
+    }
+
+    public Environment(Environment e) {
+        scope = new Frame();
+        env = e;
+    }
 
     public void print(int n) {
-	// there got to be a more efficient way to print n spaces
-	for (int i = 0; i < n; i++)
-	    System.out.print(' ');
-	System.out.println("#{Environment");
-	scope.print(n+3);
-	if (env != null)
-	    env.print(n+3);
-	for (int i = 0; i < n; i++)
-	    System.out.print(' ');
-	System.out.println('}');
+        // there got to be a more efficient way to print n spaces
+        PrettyPrintUtils.printIndentation(n);
+        System.out.println("#{Environment");
+        scope.print(n + 3);
+        if (env != null) {
+            env.print(n + 3);
+        }
+        PrettyPrintUtils.printIndentation(n);
+        System.out.println('}');
     }
 
-    // This is not in an object-oriented style, it's more or less a
-    // translation of the Scheme assq function.
-    private static Node find (Node id, Node alist) {
-	if (! alist.isPair())
-	    return null;	// in Scheme we'd return #f
-	else {
-	    Node bind = alist.getCar();
-	    if (id.getName().equals(bind.getCar().getName()))
-		// return a list containing the value as only element
-		return bind.getCdr();
-	    else
-		return find(id, alist.getCdr());
-	}
+
+    public Node lookup(Node id) {
+        Node val = scope.find(id);
+        if (val == null && env == null) {
+            System.out.println(DebugMessages.UNDEFINED_VARIABLE_LOOKUP_ERROR);
+            return null;
+        } else if (val == null) {
+            // look up the identifier in the enclosing scope
+            return env.lookup(id);
+        } else {
+            // get the value out of the list we got from find()
+            return val.getCar();
+        }
+
     }
 
-    public Node lookup (Node id) {
-	Node val = find(id, scope);
-	if (val == null && env == null) {
-	    System.out.println("undefined variable");
-	    return null;
-	}
-	else if (val == null)
-	    // look up the identifier in the enclosing scope
-	    return env.lookup(id);
-	else
-	    // get the value out of the list we got from find()
-	    return val.getCar();;
+
+    /**
+     * Defines a new variable in the current scope
+     * @param id
+     * @param val
+     */
+    public void define(Node id, Node val) {
+        scope.set(id,val);
     }
 
-    public void define (Node id, Node val) {
-	// TODO: implement this function
-    }
-
-    public void assign (Node id, Node val) {
-	// TODO: implement this function
-
-	// You can use find() to get a list containing the value and
-	// then update the value using setCar()
+    /**
+     * Sets the value of a variable, if it doesn't exist in the current scope, the enclosing scope is used recursively.
+     * @param id
+     * @param val
+     */
+    public void assign(Node id, Node val) {
+        Node exists = scope.find(id);
+        if(exists != null){
+            scope.set(id, val);
+        }else if(exists == null && env != null){
+            env.assign(id,val);
+        }else{
+            System.out.println(InterpreterMessages.UNDEFINED_VAR_ASSIGNMENT_ERROR);
+        }
     }
 }
