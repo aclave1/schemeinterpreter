@@ -63,14 +63,36 @@ public class Main {
         // Create parser
         Parser parser = new Parser(tokenScanner);
 
+
+        Environment builtinEnv = new Environment();
+        Environment globalEnv = new Environment(builtinEnv);
+
+        defineBuiltins(builtinEnv);
+
+        Node bplus = builtinEnv.lookup(new Ident(Constants.BINARY_PLUS));
+
+
         // Parse and pretty-print each input expression
         Node root = parser.parseExp();
         while (root != null) {
-            root.print(0);
+            Node results = root.eval(root,globalEnv);
+            if (results != null) {
+                results.print(0);
+            }else{
+                System.out.printf("no values returned");
+            }
             System.out.printf("\n");
             root = parser.parseExp();
         }
         System.exit(0);
+    }
+
+    public static void defineBuiltins(Environment env) {
+        Ident binaryPlus = new Ident(Constants.BINARY_PLUS);
+        env.define(binaryPlus, new BuiltinAddition(binaryPlus));
+
+        //TODO: add builtins as we go
+
     }
 
 

@@ -17,4 +17,8 @@ class BooleanLit extends Node {
     public String toString() {
         return booleanVal ? "#t" : "#f";
     }
+    @Override
+    public Node eval(Node node, Environment env) {
+        return this;
+    }
 }

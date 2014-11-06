@@ -40,4 +40,9 @@ class Closure extends Node {
     public Node apply (Node args) {
 	return null;
     }
+
+    @Override
+    public Node eval(Node node, Environment env){
+        throw new Error(DebugMessages.CANNOT_EVAL);
+    }
 }

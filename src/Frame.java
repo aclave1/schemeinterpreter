@@ -1,33 +1,35 @@
-import java.util.Hashtable;
+import java.util.HashMap;
 
-/**
- * Created by al on 10/30/14.
- */
 public class Frame {
-    private Hashtable<Node, Node> scope;
+    private HashMap<String, Node> scope;
+
     public Frame() {
-        scope = new Hashtable<Node, Node>();
+        scope = new HashMap<>();
     }
 
     public Node find(Node id) {
-        return scope.get(id);
+        if(!(id instanceof Ident)){
+            throw new Error(InterpreterMessages.IDENT_LOOKUP_ERROR);
+        }
+        Ident ident = (Ident) id;
+        return scope.get(ident.getName());
     }
 
     public void print(int n) {
+        for (String key : scope.keySet()) {
+            System.out.printf("(%s,", key);
+            scope.get(key).print(n);
+            System.out.printf(")");
+        }
+    }
+
+    public void set(Node id, Node val) {
         try {
-            for (Node key : scope.keySet()) {
-                System.out.printf("(%s,", key.getName());
-                scope.get(key).print(n);
-                System.out.printf(")");
-            }
+            scope.put(id.getName(), val);
         } catch (GetNameException g) {
             System.out.printf(DebugMessages.LITERAL_GETNAME_ERROR);
             System.exit(1);
         }
-    }
-
-    public void set(Node id, Node val){
-        scope.put(id,val);
     }
 
 }

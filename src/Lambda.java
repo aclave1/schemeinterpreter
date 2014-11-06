@@ -12,4 +12,8 @@ class Lambda extends Special {
         super.print(t,n,p);
         PrettyPrintUtils.printFirstElementOnSameLine(t,n,p);
     }
+    @Override
+    public Node eval(Node node, Environment env){
+        throw new Error("Not implemented");
+    }
 }

@@ -10,4 +10,8 @@ class Let extends Special {
         int newIndentation = n + Constants.INDENTATION;
         PrettyPrintUtils.printSubsequentIndented(t.cdr,newIndentation,p);
     }
+    @Override
+    public Node eval(Node node, Environment env){
+        throw new Error("Not implemented");
+    }
 }

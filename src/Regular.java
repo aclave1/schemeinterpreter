@@ -1,18 +1,25 @@
 class Regular extends Special {
-    public Node node;
+    public Node _node;
 
-    public Regular(Node _node){
-        node = _node;
+    public Regular(Node node) {
+        _node = node;
     }
 
     void print(Node t, int n, boolean p) {
         Node tCdr = t.getCdr();
-        node.print(n,p);
-        if(tCdr == null)return;
+        _node.print(n, p);
+        if (tCdr == null) return;
         printSpaceAfter(tCdr);
     }
+
     @Override
     public String getText() {
-        return node.toString();
+        return _node.toString();
     }
+
+    @Override
+    public Node eval(Node node, Environment env) {
+        return _node.eval(node, env);
+    }
+
 }

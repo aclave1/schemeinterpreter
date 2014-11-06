@@ -20,8 +20,14 @@ class Define extends Special {
 
     }
 
-    public boolean isFunctionDefinition(Node t){
 
+    public boolean isFunctionDefinition(Node t){
         return (t.car instanceof Cons && t.car.car instanceof Ident);
+    }
+
+
+    @Override
+    public Node eval(Node node, Environment env){
+        throw new Error("Not implemented");
     }
 }

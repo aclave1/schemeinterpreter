@@ -26,7 +26,7 @@ class Cons extends Node {
     }
 
     private Special parseSpecial(Node n) {
-        if(n == null) return null;
+        if (n == null) return null;
         Ident i = (Ident) n;
         String name = i.getName();
         if (name.equals(Keywords.QUOTE)) {
@@ -82,45 +82,48 @@ class Cons extends Node {
     }
 
     void print(int n, boolean p) {
-        if(form == null || this.cdr == null) return;
+        if (form == null || this.cdr == null) return;
         boolean printRightParen = p;
 
-        if(this.printMe){
+        if (this.printMe) {
             printRightParen = this.printMe;
             System.out.printf(this.text);
         }
 
-        if(PrettyPrintUtils.handlesIndentation(form)){
-            form.print(this, n,printRightParen);
+        if (PrettyPrintUtils.handlesIndentation(form)) {
+            form.print(this, n, printRightParen);
             return;
-        }
-        else if(this.car instanceof Cons) {
+        } else if (this.car instanceof Cons) {
             form.print(this, n, true);
         }//empty list
-        else if(this.car instanceof Nil){
-            form.print(this,n,false);
+        else if (this.car instanceof Nil) {
+            form.print(this, n, false);
         }//regular
-        else{
+        else {
             form.print(this, n, printRightParen);
         }
 
         //regular cdr
-        if(this.cdr != null && !(cdr instanceof Nil)){
-            this.cdr.print(n,printRightParen);
+        if (this.cdr != null && !(cdr instanceof Nil)) {
+            this.cdr.print(n, printRightParen);
         }
         //end of a list
-        else if(this.cdr instanceof Nil && printRightParen){
-            this.cdr.print(n,printRightParen);
+        else if (this.cdr instanceof Nil && printRightParen) {
+            this.cdr.print(n, printRightParen);
         }
 
     }
 
 
     @Override
-    public String toString(){
+    public String toString() {
         return text;
     }
 
+    @Override
+    public Node eval(Node node, Environment env) {
+        return form.eval(this, env);
+    }
 
 
 }

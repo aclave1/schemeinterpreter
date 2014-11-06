@@ -15,4 +15,9 @@ class Nil extends Node {
     public String toString(){
         return rparen;
     }
+
+    @Override
+    public Node eval(Node node, Environment env){
+        throw new Error(DebugMessages.CANNOT_EVAL);
+    }
 }

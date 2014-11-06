@@ -73,8 +73,7 @@ class Environment extends Node {
             // look up the identifier in the enclosing scope
             return env.lookup(id);
         } else {
-            // get the value out of the list we got from find()
-            return val.getCar();
+            return val;
         }
 
     }
@@ -82,26 +81,32 @@ class Environment extends Node {
 
     /**
      * Defines a new variable in the current scope
+     *
      * @param id
      * @param val
      */
     public void define(Node id, Node val) {
-        scope.set(id,val);
+        scope.set(id, val);
     }
 
     /**
      * Sets the value of a variable, if it doesn't exist in the current scope, the enclosing scope is used recursively.
+     *
      * @param id
      * @param val
      */
     public void assign(Node id, Node val) {
         Node exists = scope.find(id);
-        if(exists != null){
+        if (exists != null) {
             scope.set(id, val);
-        }else if(exists == null && env != null){
-            env.assign(id,val);
-        }else{
+        } else if (exists == null && env != null) {
+            env.assign(id, val);
+        } else {
             System.out.println(InterpreterMessages.UNDEFINED_VAR_ASSIGNMENT_ERROR);
         }
+    }
+
+    public Node eval(Node node, Environment env) {
+        throw new Error(DebugMessages.CANNOT_EVAL);
     }
 }

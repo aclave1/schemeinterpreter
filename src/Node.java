@@ -1,4 +1,4 @@
-class Node {
+abstract class Node {
 
     public String text = "$";
 
@@ -78,6 +78,8 @@ class Node {
         return false;
     }
 
+    //public abstract Node eval(Node exp);
+
     public Node apply(Node args) throws InvalidApplyException{
         throw new InvalidApplyException();
     }
@@ -85,5 +87,7 @@ class Node {
     public String getName() throws GetNameException{
         throw new GetNameException("Get name called on literal value");
     }
+
+    public abstract Node eval(Node node, Environment env);
 
 }
