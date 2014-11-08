@@ -13,33 +13,41 @@
 // style by writing a large if-then-else chain that tests the name of
 // of the function symbol.
 
+import org.omg.CORBA.DynAnyPackage.Invalid;
+
 class BuiltIn extends Node {
-    private Node symbol;
-
-    public BuiltIn(Node s)		{ symbol = s; }
-
-    public Node getSymbol()		{ return symbol; }
+    protected Node symbol;
 
 
-    public boolean isProcedure()	{ return true; }
+    public BuiltIn(Node s) {
+        symbol = s;
+    }
+
+    public Node getSymbol() {
+        return symbol;
+    }
+
+    public boolean isProcedure() {
+        return true;
+    }
 
     public void print(int n) {
-	// there got to be a more efficient way to print n spaces
-	for (int i = 0; i < n; i++)
-	    System.out.print(' ');
-	System.out.println("#{Built-in Procedure");
-	symbol.print(n+3);
-	for (int i = 0; i < n; i++)
-	    System.out.print(' ');
-	System.out.println('}');
+        // there got to be a more efficient way to print n spaces
+        for (int i = 0; i < n; i++)
+            System.out.print(' ');
+        System.out.println("#{Built-in Procedure");
+        symbol.print(n + 3);
+        for (int i = 0; i < n; i++)
+            System.out.print(' ');
+        System.out.println('}');
     }
 
     //TODO: apply for Builtin and closure
-    public Node apply (Node args) {
-	return null;
+    public Node apply(Node args) throws InvalidApplyException{
+        throw new InvalidApplyException();
     }
 
-    public Node eval(Node node, Environment env){
+    public Node eval(Node node, Environment env) {
         throw new Error(DebugMessages.CANNOT_EVAL);
     }
 }

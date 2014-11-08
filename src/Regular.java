@@ -5,6 +5,7 @@ class Regular extends Special {
         _node = node;
     }
 
+
     void print(Node t, int n, boolean p) {
         Node tCdr = t.getCdr();
         _node.print(n, p);
@@ -19,7 +20,19 @@ class Regular extends Special {
 
     @Override
     public Node eval(Node node, Environment env) {
-        return _node.eval(node, env);
+
+        Node x = _node.eval(node, env);
+        if (x.isProcedure()) {
+            try {
+                return x.apply(node.cdr, env);
+            } catch (Exception e) {
+                System.out.printf(InterpreterMessages.NON_FUNCTION_APPLY);
+                System.exit(1);
+            }
+        }
+        return x;
+
+
     }
 
 }

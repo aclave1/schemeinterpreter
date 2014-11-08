@@ -69,7 +69,11 @@ public class Main {
 
         defineBuiltins(builtinEnv);
 
-        Node bplus = builtinEnv.lookup(new Ident(Constants.BINARY_PLUS));
+        IntLit x = new IntLit(1);
+        IntLit y = new IntLit(1);
+
+
+
 
 
         // Parse and pretty-print each input expression
@@ -88,8 +92,12 @@ public class Main {
     }
 
     public static void defineBuiltins(Environment env) {
-        Ident binaryPlus = new Ident(Constants.BINARY_PLUS);
+        Ident binaryPlus = new Ident(Keywords.BINARY_PLUS);
         env.define(binaryPlus, new BuiltinAddition(binaryPlus));
+
+        Ident binaryMinus = new Ident(Keywords.BINARY_MINUS);
+        env.define(binaryMinus, new BuiltInSubtraction(binaryMinus));
+
 
         //TODO: add builtins as we go
 
