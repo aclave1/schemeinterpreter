@@ -8,6 +8,10 @@ class Cons extends Node {
      */
     private boolean printMe = false;
 
+    public boolean isPair(){
+        return true;
+    }
+
 
     // parseList() `parses' special forms, constructs an appropriate
     // object of a subclass of Special, and stores a pointer to that
@@ -122,6 +126,11 @@ class Cons extends Node {
 
     @Override
     public Node eval(Node node, Environment env) {
+        //non-procedure in operator position
+        if(!node.car.isProcedure()){
+            System.out.printf("Error: attempt to call a non-procedure\n");
+            return null;
+        }
         return form.eval(this, env);
     }
 
