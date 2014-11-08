@@ -78,9 +78,7 @@ abstract class Node {
         return false;
     }
 
-    //public abstract Node eval(Node exp);
-
-    public Node apply(Node args) throws InvalidApplyException{
+    public Node apply(Node args,Environment env) throws InvalidApplyException{
         throw new InvalidApplyException();
     }
 

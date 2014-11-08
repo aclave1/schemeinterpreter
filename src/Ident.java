@@ -13,6 +13,8 @@ class Ident extends Node {
         System.out.printf("%s", name);
     }
 
+    public boolean isSymbol(){return true;}
+
     @Override
     public String toString() {
         return name;

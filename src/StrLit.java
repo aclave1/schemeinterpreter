@@ -8,6 +8,9 @@ class StrLit extends Node {
     public void print(int n) {
         System.out.printf("\"%s\"", strVal);
     }
+    public boolean isString() {
+        return true;
+    }
 
     @Override
     public String toString() {

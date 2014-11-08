@@ -1,4 +1,5 @@
 class IntLit extends Node {
+
     private int intVal;
 
     public IntLit(int i) {
@@ -8,6 +9,17 @@ class IntLit extends Node {
     public void print(int n) {
         System.out.printf("%d", intVal);
     }
+
+    public boolean isNumber(){return true;}
+
+    public int getIntVal() {
+        return intVal;
+    }
+
+    public void setIntVal(int intVal) {
+        this.intVal = intVal;
+    }
+
 
     @Override
     public String toString() {
