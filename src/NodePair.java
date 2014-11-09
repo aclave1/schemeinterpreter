@@ -1,5 +1,5 @@
 /**
- * Created by al on 11/7/14.
+ * Basically just allows us to return two Nodes from one method.
  */
 public class NodePair {
     public Node item1;

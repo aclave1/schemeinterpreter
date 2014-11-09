@@ -69,9 +69,6 @@ public class Main {
 
         defineBuiltins(builtinEnv);
 
-        IntLit x = new IntLit(1);
-        IntLit y = new IntLit(1);
-
 
 
 
@@ -93,10 +90,23 @@ public class Main {
 
     public static void defineBuiltins(Environment env) {
         Ident binaryPlus = new Ident(Keywords.BINARY_PLUS);
-        env.define(binaryPlus, new BuiltinAddition(binaryPlus));
+        env.define(binaryPlus, new BuiltInAddition(binaryPlus));
 
         Ident binaryMinus = new Ident(Keywords.BINARY_MINUS);
         env.define(binaryMinus, new BuiltInSubtraction(binaryMinus));
+
+        Ident binaryMult = new Ident(Keywords.BINARY_MULT);
+        env.define(binaryMult, new BuiltinMultiplication(binaryMult));
+
+        Ident binaryDiv = new Ident(Keywords.BINARY_DIV);
+        env.define(binaryDiv, new BuiltInDivision(binaryDiv));
+
+        Ident binaryEquals = new Ident(Keywords.BINARY_EQUALS);
+        env.define(binaryEquals, new BuiltInEquals(binaryEquals));
+
+        Ident binaryLessThan = new Ident(Keywords.BINARY_LT);
+        env.define(binaryLessThan, new BuiltInLessThan(binaryLessThan));
+
 
 
         //TODO: add builtins as we go

@@ -15,7 +15,7 @@
 
 import org.omg.CORBA.DynAnyPackage.Invalid;
 
-class BuiltIn extends Node {
+abstract class BuiltIn extends Node {
     protected Node symbol;
 
 
@@ -43,9 +43,7 @@ class BuiltIn extends Node {
     }
 
     //TODO: apply for Builtin and closure
-    public Node apply(Node args) throws InvalidApplyException{
-        throw new InvalidApplyException();
-    }
+    public abstract Node apply(Node args,Environment env) throws InvalidApplyException;
 
     public Node eval(Node node, Environment env) {
         throw new Error(DebugMessages.CANNOT_EVAL);

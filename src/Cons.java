@@ -8,7 +8,7 @@ class Cons extends Node {
      */
     private boolean printMe = false;
 
-    public boolean isPair(){
+    public boolean isPair() {
         return true;
     }
 
@@ -127,8 +127,8 @@ class Cons extends Node {
     @Override
     public Node eval(Node node, Environment env) {
         //non-procedure in operator position
-        if(!node.car.isProcedure()){
-            System.out.printf("Error: attempt to call a non-procedure\n");
+        if (!node.car.eval(node,env).isProcedure()) {
+            System.out.printf(InterpreterMessages.NON_FUNCTION_APPLY);
             return null;
         }
         return form.eval(this, env);
