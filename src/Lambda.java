@@ -14,6 +14,6 @@ class Lambda extends Special {
     }
     @Override
     public Node eval(Node node, Environment env){
-        throw new Error("Not implemented");
+        return new Closure(node.getCdr(),env);
     }
 }

@@ -33,7 +33,7 @@
 
 import java.security.MessageDigest;
 
-class Environment extends Node {
+class Environment {
 
     // An Environment is implemented like a Cons node, in which
     // every list element (every frame) is an association list.

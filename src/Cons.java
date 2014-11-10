@@ -131,7 +131,7 @@ class Cons extends Node {
     @Override
     public Node eval(Node node, Environment env) {
         //non-procedure in operator position
-        Node firstArg = node.getCar().eval(node.getCar(),env);
+//        Node firstArg = node.getCar().eval(node.getCar(),env);
 
 //        if (!(firstArg.isProcedure() || firstArg instanceof Special) && this.literalParen) {
 //            System.out.printf(InterpreterMessages.NON_FUNCTION_APPLY);

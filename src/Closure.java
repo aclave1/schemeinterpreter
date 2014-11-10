@@ -10,39 +10,73 @@
 // the function body.
 
 class Closure extends Node {
-    private Node fun;		// a lambda expression
-    private Environment env;	// the environment in which the function
-				// was defined
+    private Node fun;        // a lambda expression
+    private Environment env;    // the environment in which the function
+    // was defined
 
-    public Closure(Node f, Environment e)	{ fun = f;  env = e; }
+    public Closure(Node f, Environment e) {
+        fun = f;
+        env = e;
+    }
 
-    public Node getFun()		{ return fun; }
-    public Environment getEnv()		{ return env; }
+    public Node getFun() {
+        return fun;
+    }
+
+    public Environment getEnv() {
+        return env;
+    }
 
     // TODO: The method isProcedure() should be defined in
     // class Node to return false.
-    public boolean isProcedure()	{ return true; }
+    public boolean isProcedure() {
+        return true;
+    }
 
     public void print(int n) {
-	// there got to be a more efficient way to print n spaces
-	for (int i = 0; i < n; i++) {
-        System.out.print(' ');
-    }
-	System.out.println("#{Procedure");
-	fun.print(n+3);
-	for (int i = 0; i < n; i++) {
-        System.out.print(' ');
-    }
-	System.out.println('}');
+        // there got to be a more efficient way to print n spaces
+        for (int i = 0; i < n; i++) {
+            System.out.print(' ');
+        }
+        System.out.println("#{Procedure");
+        fun.print(n + 3);
+        for (int i = 0; i < n; i++) {
+            System.out.print(' ');
+        }
+        System.out.println('}');
     }
 
     //TODO: apply for Builtin and closure
-    public Node apply (Node args) {
-	return null;
+    public Node apply(Node args, Environment env) throws InvalidApplyException {
+        try {
+            Node params = fun.getCar();
+            Node code = fun.getCdr().getCar();
+
+            Environment bindings = bindParamsToArgs(params, args, new Environment(env));
+
+            Node c = code.eval(code,bindings);
+
+            return c;
+        } catch (Exception e) {
+            throw new InvalidApplyException();
+        }
+    }
+
+    private Environment bindParamsToArgs(Node params, Node args,Environment env) throws InvalidArityException{
+        Node key = params.getCar();
+        Node val = args.getCar();
+        if(key == null && val == null){
+            return env;
+        }else if(key != null && val == null){
+            throw new InvalidArityException();
+        }
+        val = val.eval(args,env);
+        env.define(key,val);
+        return bindParamsToArgs(params.getCdr(),args.getCdr(),env);
     }
 
     @Override
-    public Node eval(Node node, Environment env){
+    public Node eval(Node node, Environment env) {
         throw new Error(DebugMessages.CANNOT_EVAL);
     }
 }

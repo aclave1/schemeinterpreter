@@ -22,6 +22,7 @@ class Regular extends Special {
     public Node eval(Node node, Environment env) {
 
         Node x = _node.eval(node, env);
+        if(x == null){return x;}
         if (x.isProcedure()) {
             try {
                 return x.apply(node.cdr, env);

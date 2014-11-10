@@ -6,7 +6,7 @@ public class BuiltInNumberCheck extends BuiltIn{
 
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException {
-        if(args.car.isNumber()){
+        if(args.getCar().eval(args.getCar(),env).isNumber()){
             return new BooleanLit(true);
         }return new BooleanLit(false);
     }

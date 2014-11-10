@@ -130,6 +130,10 @@ public class Main {
         Ident isNumber = new Ident(Keywords.NUMBERCHECK);
         env.define(isNumber,new BuiltInNumberCheck(isNumber));
 
+        Ident isProcedure = new Ident(Keywords.PROCEDURECHECK);
+        env.define(isProcedure,new BuiltInProcedureCheck(isProcedure));
+
+
         /**list operations*/
 
         Ident car = new Ident(Keywords.CAR);
