@@ -22,7 +22,16 @@ class Ident extends Node {
 
     @Override
     public Node eval(Node node, Environment env) {
-        return env.lookup(this);
+        Node retval = env.lookup(this);
+        if(retval == null){
+            try {
+                throw new UndefinedVariableException();
+            } catch (UndefinedVariableException e) {
+                System.out.printf(InterpreterMessages.UNDEFINED_VAR,name);
+                return new Nil();
+            }
+        }
+        return retval;
     }
 
     @Override

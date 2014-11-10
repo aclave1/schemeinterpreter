@@ -13,23 +13,21 @@ class If extends Special {
     @Override
     public Node eval(Node node, Environment env){
         Node condition = node.getCdr().getCar();
-
         Node ifTrue = node.getCdr().getCdr().getCar();
         Node ifFalse = node.getCdr().getCdr().getCdr().getCar();
+        return notFalse(condition,env) ? ifTrue.eval(ifTrue,env) : ifFalse.eval(ifFalse,env);
+    }
 
-        Node result = condition.eval(condition,env);
-
+    /**
+     *
+     * @return
+     */
+    public static boolean notFalse(Node cond, Environment env){
+        Node result = cond.eval(cond,env);
         if (result.isBoolean()) {
             BooleanLit boolVal = (BooleanLit) result;
-            boolean val = boolVal.getBooleanVal();
-
-            Node retval = val == true ? ifTrue.eval(ifTrue,env) : ifFalse.eval(ifFalse,env);
-
-            return  retval;
-        }
-        return ifTrue.eval(ifTrue, env);
-
-
+            return boolVal.getBooleanVal();
+        }return true;
     }
 
 }

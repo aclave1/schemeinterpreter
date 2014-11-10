@@ -12,6 +12,21 @@ class Cond extends Special {
     }
     @Override
     public Node eval(Node node, Environment env){
-        throw new Error("Not implemented");
+        //a condition and the return value
+
+        Node cond = node.getCdr();
+
+        Node statement = cond.getCar();
+
+        while(statement != null && !If.notFalse(statement.getCar(),env)){
+            cond = cond.getCdr();
+            statement = cond.getCar();
+        }
+        //TODO: handle else
+        if(statement == null){
+            return new Nil();
+        }else{
+            return statement.getCdr().eval(statement,env);
+        }
     }
 }

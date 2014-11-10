@@ -67,7 +67,6 @@ class Environment {
     public Node lookup(Node id) {
         Node val = scope.find(id);
         if (val == null && env == null) {
-            System.out.println(DebugMessages.UNDEFINED_VARIABLE_LOOKUP_ERROR);
             return null;
         } else if (val == null) {
             // look up the identifier in the enclosing scope
