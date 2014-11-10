@@ -21,7 +21,7 @@ public class TokenScanner {
 
         bite = tryRead(in);
 
-        if (bite == -1)
+        if (bite < 0 || bite > 127)
             return null;
 
         char ch = (char) bite;
@@ -29,19 +29,18 @@ public class TokenScanner {
         // Special characters
         if (ch == '\'')
             return new Token(Token.QUOTE);
-        //whitespace
+            //whitespace
         else if (isWhiteSpace(ch)) {
             return getNextToken();
-        }else if(isComment(ch)){
+        } else if (isComment(ch)) {
 
-            char c = (char)tryRead(in);
+            char c = (char) tryRead(in);
 
-            while(!isEndOfLine(c)){
-                c = (char)tryRead(in);
+            while (!isEndOfLine(c)) {
+                c = (char) tryRead(in);
             }
             return getNextToken();
-        }
-        else if (ch == '(')
+        } else if (ch == '(')
             return new Token(Token.LPAREN);
         else if (ch == ')')
             return new Token(Token.RPAREN);
@@ -120,12 +119,7 @@ public class TokenScanner {
             tryUnread(in, c);
             return new IntToken(tokenValue);
         }
-
-        // Operators: +, -, *, /
-        else if (ch == '+' || ch == '-' || ch == '/' || ch == '*')
-            return new IdentToken(Character.toString(ch));
-
-            // Identifiers
+        // Identifiers
         else if (isValidInitial(ch)) {
 
             buf[0] = (byte) ch;
@@ -275,7 +269,7 @@ public class TokenScanner {
         } else return false;
     }
 
-    private boolean isComment(char c){
+    private boolean isComment(char c) {
         return c == ';';
     }
 
@@ -284,7 +278,7 @@ public class TokenScanner {
     }
 
 
-    private boolean isEndOfLine(char c){
+    private boolean isEndOfLine(char c) {
         return (c == '\n' ||
                 c == '\r' ||
                 c == '\t' ||
@@ -297,7 +291,7 @@ public class TokenScanner {
                 c == '(' ||
                 c == ')' ||
                 c == ';' ||
-                isQuote(c)||
+                isQuote(c) ||
                 isEndOfLine(c)
         );
     }
