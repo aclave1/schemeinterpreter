@@ -226,8 +226,6 @@ public class TokenScanner {
      */
     private boolean isSpecialSubsequent(char c) {
         return (c == '.' ||
-                c == '+' ||
-                c == '-' ||
                 c == '@');
     }
 
@@ -240,25 +238,18 @@ public class TokenScanner {
                 c == '$' ||
                 c == '|' ||
                 c == '%' ||
-                c == '|' ||
                 c == '&' ||
-                c == '|' ||
                 c == '*' ||
-                c == '|' ||
+                c == '+' ||
+                c == '-' ||
                 c == '/' ||
-                c == '|' ||
                 c == ':' ||
-                c == '|' ||
                 c == '<' ||
                 c == '=' ||
                 c == '>' ||
-                c == '|' ||
                 c == '?' ||
-                c == '|' ||
                 c == '^' ||
-                c == '|' ||
                 c == '_' ||
-                c == '|' ||
                 c == '~');
     }
 

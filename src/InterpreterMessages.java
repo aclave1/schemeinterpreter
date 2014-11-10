@@ -20,5 +20,9 @@ public class InterpreterMessages {
     public static final String NON_INTEGER_LT = "Error:Attempted comparison on one or more non-integers\n";
 
 
+    public static final String INVALID_CAR = "Error:argument type is invalid for car. Expected pair.\n";
+    public static final String INVALID_CDR = "Error:argument type is invalid for cdr. Expected pair.\n";
+
+
 
 }

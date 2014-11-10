@@ -8,7 +8,7 @@ public class Frame {
     }
 
     public Node find(Node id) {
-        if(!(id instanceof Ident)){
+        if (!(id instanceof Ident)) {
             throw new Error(InterpreterMessages.IDENT_LOOKUP_ERROR);
         }
         Ident ident = (Ident) id;

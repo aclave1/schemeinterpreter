@@ -1,6 +1,3 @@
-/**
- * Operations applied to exactly 2 arguments
- */
 public class BinaryOperation {
 
 

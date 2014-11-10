@@ -1,5 +1,5 @@
 class Quote extends Special {
-    private static final String text = "\'";
+    private static final String text = Keywords.QUOTE;
 
     @Override
     public String getText() {
@@ -7,7 +7,7 @@ class Quote extends Special {
     }
 
     @Override
-    public Node eval(Node node, Environment env){
-        throw new Error("Not implemented");
+    public Node eval(Node node, Environment env) {
+        return node.getCdr().getCar();
     }
 }

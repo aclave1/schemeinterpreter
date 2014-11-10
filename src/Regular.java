@@ -25,7 +25,7 @@ class Regular extends Special {
         if (x.isProcedure()) {
             try {
                 return x.apply(node.cdr, env);
-            } catch (Exception e) {
+            } catch (InvalidApplyException e) {
                 System.out.printf(InterpreterMessages.NON_FUNCTION_APPLY);
                 System.exit(1);
             }

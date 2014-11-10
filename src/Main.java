@@ -95,10 +95,15 @@ public class Main {
 
     public static void defineBuiltins(Environment env) {
 
+        /**
+         * specials
+         * */
         Ident define = new Ident(Keywords.DEFINE);
         env.define(define,new Define());
 
-
+        /**
+         * binary arithmetic
+         */
         Ident binaryPlus = new Ident(Keywords.BINARY_PLUS);
         env.define(binaryPlus, new BuiltInAddition(binaryPlus));
 
@@ -118,8 +123,28 @@ public class Main {
         env.define(binaryLessThan, new BuiltInLessThan(binaryLessThan));
 
 
+        /**type checks*/
+        Ident isSymbol = new Ident(Keywords.SYMBOLCHECK);
+        env.define(isSymbol,new BuiltInSymbolCheck(isSymbol));
 
-        //TODO: add builtins as we go
+        Ident isNumber = new Ident(Keywords.NUMBERCHECK);
+        env.define(isNumber,new BuiltInNumberCheck(isNumber));
+
+        /**list operations*/
+
+        Ident car = new Ident(Keywords.CAR);
+        env.define(car,new BuiltInCar(car));
+
+        Ident cdr = new Ident(Keywords.CDR);
+        env.define(cdr,new BuiltInCdr(cdr));
+
+
+        Ident cons = new Ident(Keywords.CONS);
+        env.define(cons,new BuiltInCons(cons));
+        Ident quote = new Ident(Keywords.QUOTE);
+        env.define(quote,new BuiltInCons(quote));
+
+
 
     }
 

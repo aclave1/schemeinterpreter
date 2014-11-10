@@ -2,6 +2,10 @@ class Cons extends Node {
     private Special form;
     public String text = Keywords.LPAREN;
 
+    public Special getForm(){
+        return form;
+    }
+
     /**
      * Distinguishes between a cons node from a paren explicitly typed in the user's code,
      * and an implicit cons node in the tree which is not to be printed.
@@ -127,11 +131,12 @@ class Cons extends Node {
     @Override
     public Node eval(Node node, Environment env) {
         //non-procedure in operator position
-        Node firstArg = node.car.eval(node,env);
-        if (!(firstArg.isProcedure() || firstArg instanceof Special) && this.literalParen) {
-            System.out.printf(InterpreterMessages.NON_FUNCTION_APPLY);
-            return new Nil();
-        }
+        Node firstArg = node.getCar().eval(node.getCar(),env);
+
+//        if (!(firstArg.isProcedure() || firstArg instanceof Special) && this.literalParen) {
+//            System.out.printf(InterpreterMessages.NON_FUNCTION_APPLY);
+//            return new Nil();
+//        }
         return form.eval(this, env);
     }
 
