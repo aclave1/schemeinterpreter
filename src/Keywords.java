@@ -6,6 +6,7 @@ public class Keywords {
     public static final String LET = "let";
     public static final String BEGIN = "begin";
     public static final String QUOTE = "\'";
+    public static final String QUOTE_WORD = "quote";
     public static final String SET = "set!";
     public static final String LPAREN = "(";
 

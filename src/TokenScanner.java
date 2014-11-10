@@ -282,6 +282,8 @@ public class TokenScanner {
                 c == '(' ||
                 c == ')' ||
                 c == ';' ||
+                c == (char)-1 ||
+                c == (char)65525 ||
                 isQuote(c) ||
                 isEndOfLine(c)
         );

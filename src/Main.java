@@ -145,8 +145,12 @@ public class Main {
 
         Ident cons = new Ident(Keywords.CONS);
         env.define(cons,new BuiltInCons(cons));
+
         Ident quote = new Ident(Keywords.QUOTE);
         env.define(quote,new BuiltInCons(quote));
+
+        Ident quoteWord = new Ident(Keywords.QUOTE_WORD);
+        env.define(quoteWord,new BuiltInCons(quoteWord));
 
 
 
