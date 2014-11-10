@@ -12,7 +12,24 @@ class If extends Special {
     }
     @Override
     public Node eval(Node node, Environment env){
-        throw new Error("Not implemented");
+        Node condition = node.getCdr().getCar();
+
+        Node ifTrue = node.getCdr().getCdr().getCar();
+        Node ifFalse = node.getCdr().getCdr().getCdr().getCar();
+
+        Node result = condition.eval(condition,env);
+
+        if (result.isBoolean()) {
+            BooleanLit boolVal = (BooleanLit) result;
+            boolean val = boolVal.getBooleanVal();
+
+            Node retval = val == true ? ifTrue.eval(ifTrue,env) : ifFalse.eval(ifFalse,env);
+
+            return  retval;
+        }
+        return ifTrue.eval(ifTrue, env);
+
+
     }
 
 }

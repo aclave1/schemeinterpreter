@@ -81,5 +81,16 @@ dddddddddddddddddd
 
 "functions:"
 (define (x y) (b+ y y))
+(define (fun p q)(b* (b+ p q) (b+ p q)))
 (define z (b+ 1 1))
+(define zz (b+ z z))
 (x z)
+(fun zz z)
+(define lamplus ((lambda (y) b+ y y) 1))
+(define lamstar ((lambda (y) b* y y) 1))
+lamplus
+lamstar
+
+"specials"
+
+(quote 1 2)

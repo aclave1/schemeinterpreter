@@ -12,6 +12,12 @@ class BooleanLit extends Node {
             System.out.printf("#f");
         }
     }
+    public boolean isBoolean(){
+        return true;
+    }
+    public boolean getBooleanVal(){
+        return booleanVal;
+    }
 
     @Override
     public String toString() {
