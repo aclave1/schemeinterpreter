@@ -74,7 +74,12 @@ public class Main {
 
 
         // Parse and pretty-print each input expression
-        Node root = parser.parseExp();
+        Node root = new Nil();
+        try {
+            root = parser.parseExp();
+        } catch (ArrayIndexOutOfBoundsException a) {
+            System.out.printf(InterpreterMessages.INVALID_EOF);
+        }
         while (root != null) {
             Node results = root.eval(root,globalEnv);
             if (results != null) {
@@ -89,6 +94,11 @@ public class Main {
     }
 
     public static void defineBuiltins(Environment env) {
+
+        Ident define = new Ident(Keywords.DEFINE);
+        env.define(define,new Define());
+
+
         Ident binaryPlus = new Ident(Keywords.BINARY_PLUS);
         env.define(binaryPlus, new BuiltInAddition(binaryPlus));
 

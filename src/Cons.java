@@ -6,7 +6,7 @@ class Cons extends Node {
      * Distinguishes between a cons node from a paren explicitly typed in the user's code,
      * and an implicit cons node in the tree which is not to be printed.
      */
-    private boolean printMe = false;
+    private boolean literalParen = false;
 
     public boolean isPair() {
         return true;
@@ -70,14 +70,14 @@ class Cons extends Node {
     public Cons(Node a, Node d) {
         car = a;
         cdr = d;
-        printMe = false;
+        literalParen = false;
         parseList(car);
     }
 
     public Cons(Node a, Node d, boolean b) {
         car = a;
         cdr = d;
-        printMe = b;
+        literalParen = b;
         parseList(car);
     }
 
@@ -89,8 +89,8 @@ class Cons extends Node {
         if (form == null || this.cdr == null) return;
         boolean printRightParen = p;
 
-        if (this.printMe) {
-            printRightParen = this.printMe;
+        if (this.literalParen) {
+            printRightParen = this.literalParen;
             System.out.printf(this.text);
         }
 
@@ -127,9 +127,10 @@ class Cons extends Node {
     @Override
     public Node eval(Node node, Environment env) {
         //non-procedure in operator position
-        if (!node.car.eval(node,env).isProcedure()) {
+        Node firstArg = node.car.eval(node,env);
+        if (!(firstArg.isProcedure() || firstArg instanceof Special) && this.literalParen) {
             System.out.printf(InterpreterMessages.NON_FUNCTION_APPLY);
-            return null;
+            return new Nil();
         }
         return form.eval(this, env);
     }

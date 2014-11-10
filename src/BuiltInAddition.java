@@ -6,7 +6,7 @@ public class BuiltInAddition extends BuiltIn implements BinaryArithmeticOperatio
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException{
         try {
-            return BinaryOperation.applyBinaryIntegerOperation(args,this);
+            return BinaryOperation.applyBinaryIntegerOperation(args,env,this);
         } catch (InvalidArgumentException e) {
             System.out.printf("Attempted to add one or more non-integers");
             System.exit(0);

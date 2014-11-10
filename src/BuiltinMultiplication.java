@@ -9,7 +9,7 @@ public class BuiltinMultiplication extends BuiltIn implements BinaryArithmeticOp
     @Override
     public Node apply(Node node, Environment env) {
         try {
-            return BinaryOperation.applyBinaryIntegerOperation(node, this);
+            return BinaryOperation.applyBinaryIntegerOperation(node,env, this);
         } catch (InvalidArgumentException e) {
             System.out.printf(InterpreterMessages.NON_INTEGER_MULTIPLICATION);
             System.exit(0);

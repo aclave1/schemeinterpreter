@@ -2,7 +2,7 @@
 // hierarchy.  We'll discuss some of them in class.  The easiest solution
 // is to not add any fields and to use empty constructors.
 
-abstract class Special {
+abstract class Special extends Node{
 
     private static final String _text = "$Special$";
     public Node node;

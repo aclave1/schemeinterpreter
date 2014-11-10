@@ -12,7 +12,7 @@ public class BuiltInEquals extends BuiltIn implements BinaryComparisonOperation 
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException {
         try {
-            return BinaryOperation.applyBinaryIntegerOperation(args,this);
+            return BinaryOperation.applyBinaryIntegerOperation(args,env,this);
         } catch (Exception e) {
             System.out.printf(InterpreterMessages.NON_INTEGER_EQUALS);
             System.exit(1);

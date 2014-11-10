@@ -12,7 +12,7 @@ public class BuiltInLessThan extends BuiltIn implements BinaryComparisonOperatio
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException {
         try {
-            return BinaryOperation.applyBinaryIntegerOperation(args,this);
+            return BinaryOperation.applyBinaryIntegerOperation(args,env,this);
         } catch (Exception e) {
             System.out.printf(InterpreterMessages.NON_INTEGER_LT);
         }

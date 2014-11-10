@@ -6,7 +6,7 @@ public class BuiltInSubtraction extends BuiltIn implements BinaryArithmeticOpera
 
     public Node apply(Node node, Environment env){
         try {
-            return BinaryOperation.applyBinaryIntegerOperation(node, this);
+            return BinaryOperation.applyBinaryIntegerOperation(node,env, this);
         } catch (InvalidArgumentException e) {
             System.out.printf(InterpreterMessages.NON_INTEGER_SUBTRACTION);
             System.exit(0);
