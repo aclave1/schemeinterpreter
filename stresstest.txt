@@ -79,3 +79,7 @@ zzzqzzzqzzzqzzzq
 "undefined variable:"
 dddddddddddddddddd
 
+"functions:"
+(define (x y) (b+ y y))
+(define z (b+ 1 1))
+(x z)

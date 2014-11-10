@@ -29,12 +29,20 @@ class Define extends Special {
     @Override
     public Node eval(Node node, Environment env){
         NodePair args = BinaryOperation.extractBinaryArgs(node.cdr);
-        if (!args.item1.isSymbol()) {
+
+
+        if(args.item1 instanceof Cons){
+            Node params = node.getCdr().getCar().getCdr();
+            Node code = node.getCdr().getCdr();
+            Node fnDef = new Cons(params,code);
+            env.define(args.item1.getCar(),new Closure(fnDef,env));
+        }else if (!args.item1.isSymbol()) {
             System.out.printf(InterpreterMessages.IDENT_LOOKUP_ERROR);
             return new Nil();
+        }else{
+            Node val = args.item2.eval(node, env);
+            env.define(args.item1, val);
         }
-        Node val = args.item2.eval(node, env);
-        env.define(args.item1, val);
         return new Nil();
     }
 }

@@ -1,3 +1,0 @@
-(define z 1)
-(define q (b+ 1 2))
-((lambda (x y) (b+ x y))z q)
