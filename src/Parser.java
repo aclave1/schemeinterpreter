@@ -90,4 +90,13 @@ class Parser {
         }
 
     }
+
+
+    public static Parser buildParser() {
+        return new Parser(new TokenScanner(System.in));
+    }
+
+    public static Parser buildParser(String filepath) {
+        return new Parser(new TokenScanner(SystemInputs.readFromFile(filepath)));
+    }
 }

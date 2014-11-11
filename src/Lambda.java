@@ -11,8 +11,10 @@ class Lambda extends Special {
         super.print(t,n,p);
         PrettyPrintUtils.printFirstElementOnSameLine(t,n,p);
     }
+
     @Override
-    public Node eval(Node node, Environment env){
-        return new Closure(node.getCdr(),env);
+    public Node eval(Node node, Environment env) {
+        throw new Error("NotImplemented: no implicit begin");
+//        return new Closure(node.getCdr(),env);
     }
 }

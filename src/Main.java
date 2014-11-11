@@ -65,9 +65,9 @@ public class Main {
 
 
         Environment builtinEnv = new Environment();
+        defineBuiltins(builtinEnv);
         Environment globalEnv = new Environment(builtinEnv);
 
-        defineBuiltins(builtinEnv);
 
 
 
@@ -136,9 +136,17 @@ public class Main {
 
         Ident car = new Ident(Keywords.CAR);
         env.define(car,new BuiltInCar(car));
-
         Ident cdr = new Ident(Keywords.CDR);
         env.define(cdr,new BuiltInCdr(cdr));
+
+        Ident setCar = new Ident(Keywords.SET_CAR);
+        env.define(setCar,new BuiltInSetCar(setCar));
+        Ident setCdr = new Ident(Keywords.SET_CDR);
+        env.define(setCdr,new BuiltInSetCdr(setCdr));
+        Ident pairCheck = new Ident(Keywords.PAIRCHECK);
+        env.define(pairCheck,new BuiltInPairCheck(pairCheck));
+        Ident nullCheck = new Ident(Keywords.NULLCHECK);
+        env.define(nullCheck,new BuiltInNullCheck(nullCheck));
 
 
         /**cons*/
@@ -151,6 +159,21 @@ public class Main {
 
         Ident eq = new Ident(Keywords.OBJECT_EQUALS);
         env.define(eq,new BuiltInObjectEquals(eq));
+
+
+        /**eval, apply, interaction-environment*/
+        Ident eval = new Ident(Keywords.EVAL);
+        env.define(eval,new BuiltInEval(eval));
+
+        Ident apply = new Ident(Keywords.APPLY);
+        env.define(apply,new BuiltInApply(apply));
+
+        Ident interEnv = new Ident(Keywords.INTERACTION_ENVIRONMENT);
+        env.define(interEnv,new BuiltInInteractionEnvironment(interEnv));
+
+
+
+
 
 
 

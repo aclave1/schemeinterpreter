@@ -4,7 +4,7 @@ public class Frame {
     private HashMap<String, Node> scope;
 
     public Frame() {
-        scope = new HashMap<>();
+        scope = new HashMap<String,Node>();
     }
 
     public Node find(Node id) {

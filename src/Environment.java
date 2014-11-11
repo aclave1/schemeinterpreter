@@ -33,7 +33,7 @@
 
 import java.security.MessageDigest;
 
-class Environment {
+class Environment extends Node{
 
     // An Environment is implemented like a Cons node, in which
     // every list element (every frame) is an association list.
@@ -49,6 +49,28 @@ class Environment {
     public Environment(Environment e) {
         scope = new Frame();
         env = e;
+    }
+
+    public Environment getEnv(){
+        return env;
+    }
+
+    public Environment getGlobalEnv(){
+        Environment globalEnv;//this will represent the user's global env
+        Environment builtinEnv;//this will represent the builtin env
+        Environment nullEnv;//this will represent the builtin
+
+        globalEnv = this;
+        builtinEnv = env;
+        nullEnv = env.getEnv();
+        //we want two levels down from the null env, the user's global env
+        while (nullEnv != null){
+            globalEnv = builtinEnv;
+            builtinEnv = nullEnv;
+            nullEnv = nullEnv.getEnv();
+        }
+
+        return globalEnv;
     }
 
     public void print(int n) {
