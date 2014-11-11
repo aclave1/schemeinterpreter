@@ -95,6 +95,10 @@ public class Main {
 
     public static void defineBuiltins(Environment env) {
 
+        /**specials*/
+        Ident elseClause = new Ident(Keywords.ELSE);
+        env.define(elseClause,new Else());
+
         /**
          * binary arithmetic
          */

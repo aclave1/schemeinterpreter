@@ -2,7 +2,7 @@ class Cons extends Node {
     private Special form;
     public String text = Keywords.LPAREN;
 
-    public Special getForm(){
+    public Special getForm() {
         return form;
     }
 
@@ -53,6 +53,8 @@ class Cons extends Node {
             return new Define();
         } else if (name.equals(Keywords.SET)) {
             return new Set();
+        } else if (name.equals(Keywords.ELSE)) {
+            return new Else();
         } else {
             return new Regular(n);
         }

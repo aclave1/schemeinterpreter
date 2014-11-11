@@ -1,8 +1,8 @@
 class Cond extends Special {
-    private static final String text = "cond\n";
+
     @Override
     public String getText() {
-        return text;
+        return Keywords.COND;
     }
     @Override
     public void print(Node t, int n, boolean p){
@@ -18,11 +18,13 @@ class Cond extends Special {
 
         Node statement = cond.getCar();
 
-        while(statement != null && !If.notFalse(statement.getCar(),env)){
+
+
+        while(statement != null && If.isFalse(statement.getCar(),env)){
             cond = cond.getCdr();
             statement = cond.getCar();
         }
-        //TODO: handle else
+
         if(statement == null){
             return new Nil();
         }else{

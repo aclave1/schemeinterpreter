@@ -1,8 +1,8 @@
 class Let extends Special {
-    private static final String text = "let\n";
+
     @Override
     public String getText() {
-        return text;
+        return Keywords.LET;
     }
     @Override
     public void print(Node t, int n, boolean p){

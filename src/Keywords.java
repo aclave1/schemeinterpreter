@@ -8,6 +8,7 @@ public class Keywords {
     public static final String QUOTE = "\'";
     public static final String QUOTE_WORD = "quote";
     public static final String SET = "set!";
+    public static final String ELSE = "else";
     public static final String LPAREN = "(";
 
 

@@ -1,9 +1,9 @@
 class Define extends Special {
-    private static final String text = "define";
+
 
     @Override
     public String getText() {
-        return text;
+        return Keywords.DEFINE;
     }
 
     @Override

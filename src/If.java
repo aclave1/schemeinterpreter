@@ -1,8 +1,8 @@
 class If extends Special {
-    private static final String text = "if";
+
     @Override
     public String getText() {
-        return text;
+        return Keywords.IF;
     }
 
     @Override
@@ -19,8 +19,8 @@ class If extends Special {
     }
 
     /**
+     * @return true if the condition evaluates to anything but #f
      *
-     * @return
      */
     public static boolean notFalse(Node cond, Environment env){
         Node result = cond.eval(cond,env);
@@ -28,6 +28,10 @@ class If extends Special {
             BooleanLit boolVal = (BooleanLit) result;
             return boolVal.getBooleanVal();
         }return true;
+    }
+
+    public static boolean isFalse(Node cond, Environment env){
+        return !notFalse(cond,env);
     }
 
 }
