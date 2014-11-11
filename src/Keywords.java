@@ -17,7 +17,7 @@ public class Keywords {
     public static final String BINARY_MINUS = "b-";
     public static final String BINARY_MULT = "b*";
     public static final String BINARY_DIV = "b/";
-    public static final String BINARY_EQUALS = "b=";
+    public static final String BINARY_ARITHMETIC_EQUALS = "b=";
     public static final String BINARY_LT = "b<";
     //list operations
     public static final String CAR = "car";
@@ -30,7 +30,7 @@ public class Keywords {
     public static final String SYMBOLCHECK = "symbol?";
     public static final String NULLCHECK = "null?";
     public static final String PAIRCHECK = "pair?";
-    public static final String EQCHECK = "eq?";
+    public static final String OBJECT_EQUALS = "eq?";
     public static final String PROCEDURECHECK = "procedure?";
     //io
     public static final String IOREAD = "read";

@@ -96,12 +96,6 @@ public class Main {
     public static void defineBuiltins(Environment env) {
 
         /**
-         * specials
-         * */
-        Ident define = new Ident(Keywords.DEFINE);
-        env.define(define,new Define());
-
-        /**
          * binary arithmetic
          */
         Ident binaryPlus = new Ident(Keywords.BINARY_PLUS);
@@ -116,7 +110,7 @@ public class Main {
         Ident binaryDiv = new Ident(Keywords.BINARY_DIV);
         env.define(binaryDiv, new BuiltInDivision(binaryDiv));
 
-        Ident binaryEquals = new Ident(Keywords.BINARY_EQUALS);
+        Ident binaryEquals = new Ident(Keywords.BINARY_ARITHMETIC_EQUALS);
         env.define(binaryEquals, new BuiltInEquals(binaryEquals));
 
         Ident binaryLessThan = new Ident(Keywords.BINARY_LT);
@@ -143,14 +137,16 @@ public class Main {
         env.define(cdr,new BuiltInCdr(cdr));
 
 
+        /**cons*/
         Ident cons = new Ident(Keywords.CONS);
         env.define(cons,new BuiltInCons(cons));
-
         Ident quote = new Ident(Keywords.QUOTE);
         env.define(quote,new BuiltInCons(quote));
-
         Ident quoteWord = new Ident(Keywords.QUOTE_WORD);
         env.define(quoteWord,new BuiltInCons(quoteWord));
+
+        Ident eq = new Ident(Keywords.OBJECT_EQUALS);
+        env.define(eq,new BuiltInObjectEquals(eq));
 
 
 

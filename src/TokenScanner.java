@@ -236,7 +236,6 @@ public class TokenScanner {
         return (c == '!' ||
                 c == '|' ||
                 c == '$' ||
-                c == '|' ||
                 c == '%' ||
                 c == '&' ||
                 c == '*' ||
