@@ -60,7 +60,7 @@ class Closure extends Node {
         }
     }
 
-    private Environment bindParamsToArgs(Node params, Node args, Environment env) throws InvalidArityException {
+    public static Environment bindParamsToArgs(Node params, Node args, Environment env) throws InvalidArityException {
         Node key = params.getCar();
         Node val = args.getCar();
         if (key == null && val == null) {

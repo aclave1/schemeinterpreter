@@ -199,3 +199,25 @@ setme
         (set! zzzzzzz 1)
         (b+ x y)
 )
+
+;;basic let
+( let
+    ((x 2)
+     (y 2))
+    (define q 10)
+    (b+ q (b+ x y))
+)
+
+;;test enclosing environments
+
+(define x 1000)
+( let
+    ((x 2)
+     (y 2))
+    (define q 10)
+    (b+ q (b+ x y))
+);;14
+
+(let ((y 2))
+    (b+ x y)
+);;10002
