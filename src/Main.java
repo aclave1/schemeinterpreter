@@ -15,53 +15,25 @@ public class Main {
     };
 
     public static void main(String argv[]) {
-
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+        Parser parser;
 
         //set to true if you want to provided a filepath instead of using < (redirection)
         boolean readFromFilePath = false;
-        boolean debugScanner = false;
+
         String filename = null;
         for (int i = 0; i < argv.length; i++) {
-            if (argv[i].equals("-d")) {
-                debugScanner = true;
-            } else if (argv[i].equals("-f") && i < argv.length) {
+            if (argv[i].equals("-f") && i < argv.length) {
                 readFromFilePath = true;
                 filename = argv[++i];
             }
         }
 
-        if (readFromFilePath == true) {
-            try {
-                System.setIn(new FileInputStream(filename));
-            } catch (Exception e) {
-                System.out.println("failure");
-            }
+
+        if(readFromFilePath){
+            parser = Parser.buildParser(filename);
+        }else{
+            parser = Parser.buildParser();
         }
-        // create scanner that reads from standard input
-        TokenScanner tokenScanner = new TokenScanner(System.in);
-
-
-        if (debugScanner == true) {
-            // debug scanner
-            Token tok = tokenScanner.getNextToken();
-            while (tok != null) {
-                int tt = tok.getType();
-                System.out.print(TokenName[tt]);
-                if (tt == Token.INT)
-                    System.out.println(", intVal = " + tok.getIntVal());
-                else if (tt == Token.STRING)
-                    System.out.println(", strVal = " + tok.getStrVal());
-                else if (tt == Token.IDENT)
-                    System.out.println(", name = " + tok.getName());
-                else
-                    System.out.println();
-                tok = tokenScanner.getNextToken();
-            }
-        }
-
-        // Create parser
-        Parser parser = new Parser(tokenScanner);
 
 
         Environment builtinEnv = new Environment();
