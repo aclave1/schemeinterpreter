@@ -110,6 +110,31 @@ class Environment extends Node{
         scope.set(id, val);
     }
 
+    public void set(Node id, Node val) throws UndefinedVariableException {
+        Frame scopeOfId = scopeContaining(id);
+        if(scopeOfId != null){
+            scopeOfId.set(id,val);
+        }else{
+            throw new UndefinedVariableException();
+        }
+
+    }
+
+    /**
+     * finds the first scope containing id
+     * @param id the identifier to get the scope for
+     * @return the first scope which id is defined in, null if it's not defined
+     */
+    private Frame scopeContaining(Node id){
+        Node existing = scope.find(id);
+        if(existing == null){
+            return env.scopeContaining(id);
+        }else{
+            return scope;
+        }
+    }
+
+
     /**
      * Sets the value of a variable, if it doesn't exist in the current scope, the enclosing scope is used recursively.
      *

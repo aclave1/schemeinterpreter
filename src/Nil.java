@@ -1,7 +1,7 @@
 class Nil extends Node {
     public String lparen = "(";
     public String rparen = ")";
-    public String parens = "()";
+    public String parens = "(%s)";
     private boolean printOnlyright = false;
     private String _errorMessage = null;
 
@@ -32,9 +32,9 @@ class Nil extends Node {
         } else {
             //prints error messages like {Undefined-var} and {Unspecified}
             if (_errorMessage != null) {
-                System.out.printf(parens, _errorMessage);
+                System.out.printf(parens,_errorMessage);
             } else {
-                System.out.printf(parens);
+                System.out.printf(parens,"");
             }
         }
     }

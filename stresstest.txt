@@ -45,6 +45,21 @@
 (number? 1)
 (number? 'x)
 
+
+(define ispair '(1 2))
+(define nonpair '())
+(define nonpair2 '())
+(define isnull '())
+(define nonNull 1)
+
+(null? isnull)
+(null? nonNull)
+(pair? ispair)
+(pair? '())
+(pair? nonpair)
+(pair? nonpair2)
+(pair? 1)
+
 (procedure? b+)
 (procedure? b-)
 (procedure? b*)
@@ -98,13 +113,12 @@ malformed
 
 "specials"
 (quote 1 2)
-
 (define true #t)
 (define false #f)
 
-(if (symbol? 'x) 1 0)
-(if (symbol? 'x) (b+ 1 1) ( b+ 0 0))
-(if (symbol? 1) (b+ 1 1) ( b+ 0 0))
+(if (symbol? 'x) 1 0);;#t
+(if (symbol? 'x) (b+ 1 0) ( b+ 0 0));;1
+(if (symbol? 1) (b+ 0 0) ( b+ 1 0));;
 
 (cond
       ((false) 0)
@@ -117,14 +131,66 @@ malformed
       ((false) 0)
       ((false) 0)
       ((true) 1)
-)
+);;1
 
 (cond
       ((symbol? 1) 0)
       ((symbol? 'x) 1)
-)
+);;1
 
 (cond
-      ((eq? 1 2) 1)
-      ((symbol? 'x) 0)
-)
+      ((eq? 1 2) 0)
+      ((symbol? 'x) 1)
+);;1
+
+(cond
+        ((symbol? 1) 0)
+        (else 1)
+);;1
+(cond
+        (else 1);;scheme48 evaluates else immediately, regardless of what's after.
+        ((symbol? 1) 0)
+);;1
+(define nonprocedure '(1 2))
+(define (isprocedure y) (b+ y y))
+(procedure? isprocedure)
+(procedure? nonprocedure)
+
+
+(define x '())
+(define z '())
+(define p '(1))
+(define q '(1))
+(define y x)
+(eq? y x);;#t
+(eq? x z) ;;eq? of two nils returns #t in scheme48
+(eq? p q);;#f
+
+
+;;evaluating lists as code and evaluating nested code lists
+(define toEval '(b+ 1 2))
+(define nestedEval 'toEval)
+(eval toEval (interaction-environment));;3
+(eval nestedEval (interaction-environment));;(b+ 1 2)
+(define evalFromNestedEval (eval nestedEval (interaction-environment)))
+(eval evalFromNestedEval (interaction-environment));;3
+
+(begin
+    (define x 1)
+    (define y 2)
+    (b+ x y)
+);;3
+
+(begin
+    (define x 1)
+    (define y 2)
+    (set! x 10)
+    (b+ x y)
+);;12
+
+(define setme 1)
+setme
+(set! setme 2)
+setme
+(set! setme '(1 2))
+setme

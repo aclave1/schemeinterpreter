@@ -43,6 +43,6 @@ class Define extends Special {
             Node val = args.item2.eval(node, env);
             env.define(args.item1, val);
         }
-        return new Nil();
+        return new Nil("no values returned");
     }
 }

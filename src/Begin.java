@@ -13,6 +13,17 @@ class Begin extends Special {
     }
     @Override
     public Node eval(Node node, Environment env){
-        throw new Error("Not implemented");
+        return executeStatements(node,env);
+    }
+
+    public Node executeStatements(Node node, Environment env){
+        Node statement = node.getCdr();
+        Node nextStatement = statement;
+        while(!nextStatement.isNull()){
+            statement.getCar().eval(statement,env);
+            statement = nextStatement;
+            nextStatement = nextStatement.getCdr();
+        }
+        return statement.getCar().eval(statement,env);
     }
 }

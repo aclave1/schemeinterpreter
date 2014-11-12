@@ -1,3 +1,6 @@
-(if (symbol? 'x) 1 0)
-(if (symbol? 'x) (b+ 1 1) ( b+ 0 0))
-(if (symbol? 1) (b+ 1 1) ( b+ 0 0))
+(begin
+    (define x 1)
+    (define y 2)
+    (set! x 25)
+    (b+ x y)
+)

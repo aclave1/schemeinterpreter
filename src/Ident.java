@@ -27,8 +27,7 @@ class Ident extends Node {
             try {
                 throw new UndefinedVariableException();
             } catch (UndefinedVariableException e) {
-                System.out.printf(InterpreterMessages.UNDEFINED_VAR,name);
-                return new Nil();
+                return new Nil(String.format(InterpreterMessages.UNDEFINED_VAR, getName()));
             }
         }
         return retval;

@@ -4,7 +4,7 @@
 public class InterpreterMessages {
 
     public static final String INVALID_EOF = "Error:End of file reached prematurely.\n";
-    public static final String UNDEFINED_VAR = "Error: Undefined variable: %s\n";
+    public static final String UNDEFINED_VAR = "error:undefined variable %s";
 
     public static final String IDENT_PRIMITIVE_ERROR = "Error:Cannot use primitive as identifier.\n";
     public static final String UNDEFINED_VAR_ASSIGNMENT_ERROR = "Error:attempted assignment to an undefined value.\n";
