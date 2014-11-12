@@ -6,6 +6,17 @@ class Cons extends Node {
         return form;
     }
 
+    public void setCar(Node a) {
+        car = a;
+        parseList(a);
+    }
+    public void setCdr(Node a) {
+        if(cdr != null && cdr.getCar() != null){
+            cdr.setCar(a);
+        }
+    }
+
+
     /**
      * Distinguishes between a cons node from a paren explicitly typed in the user's code,
      * and an implicit cons node in the tree which is not to be printed.

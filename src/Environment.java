@@ -148,7 +148,6 @@ class Environment extends Node{
         } else if (exists == null && env != null) {
             env.assign(id, val);
         } else {
-            System.out.printf(InterpreterMessages.UNDEFINED_VAR_ASSIGNMENT_ERROR,id);
             throw new UndefinedVariableException();
         }
     }

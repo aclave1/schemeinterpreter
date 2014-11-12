@@ -7,11 +7,15 @@ class Set extends Special {
 
     @Override
     public Node eval(Node node, Environment env) {
-        try {
-            env.assign(node.getCdr().getCar(),node.getCdr().getCdr().getCar());
-        }catch(UndefinedVariableException e){
+        Node key = node.getCdr().getCar();
+        Node val = node.getCdr().getCdr().getCar();
 
+        try {
+            env.assign(key, val);
+        } catch (UndefinedVariableException e) {
+            return new Nil(String.format(InterpreterMessages.UNDEFINED_VAR_ASSIGNMENT_ERROR, key));
         }
+
         return new Nil();
     }
 }

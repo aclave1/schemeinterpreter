@@ -194,6 +194,8 @@ setme
 setme
 (set! setme '(1 2))
 setme
+(set! asdfasf 1);;throw an error
+
 (begin (define x 1)
         (define y 2)
         (set! zzzzzzz 1)
@@ -221,3 +223,24 @@ setme
 (let ((y 2))
     (b+ x y)
 );;10002
+
+
+
+(define x (cons 1 2))
+(set-car! x 3)
+x;;(1 2)
+(car x);;3
+(define badcar 1)
+(set-car! badcar 0);;throw error
+
+(define y '(1 2))
+(set-cdr! y (b+ (cdr y) 1))
+(cdr 1)
+y
+(cdr y)
+(define x '(0 1))
+(define y '(1 0))
+(set-car! x 1)
+(set-cdr! y 1)
+(car x)
+(cdr y)

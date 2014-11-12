@@ -5,6 +5,18 @@ public class BuiltInSetCar extends BuiltIn{
 
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException {
-        throw new Error("Not implemented");
+        Node carToSet = args.getCar();
+        Node valToSet = args.getCdr().getCar();
+
+        carToSet = carToSet.eval(carToSet,env);
+        valToSet = valToSet.eval(valToSet,env);
+
+        if(!carToSet.isPair()){
+            return new Nil(String.format(InterpreterMessages.INVALID_SETCAR,carToSet));
+        }
+        carToSet.setCar(valToSet);
+
+
+        return new Nil("unspecified");
     }
 }

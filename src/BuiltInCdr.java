@@ -5,14 +5,21 @@ public class BuiltInCdr extends BuiltIn{
 
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException {
-        Node cdr = args.getCar().getCdr().getCar().getCdr();
+        Node getCdrOf = args.getCar();
 
-        if(cdr == null || cdr instanceof Nil){
+        if(getCdrOf == null){
             System.out.printf(InterpreterMessages.INVALID_CDR);
             return new Nil();
         }
+        getCdrOf = getCdrOf.eval(getCdrOf,env);
 
-        return cdr;
+
+        try {
+            return getCdrOf.getCdr().getCar();
+        } catch (NullPointerException e) {
+            return new Nil(InterpreterMessages.INVALID_CDR);
+        }
+
     }
 
 

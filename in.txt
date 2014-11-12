@@ -1,10 +1,6 @@
-(define x 1000)
-( let
-    ((x 2)
-     (y 2))
-    (define q 10)
-    (b+ q (b+ x y))
-);;14
-(let ((y 2))
-    (b+ x y)
-)
+(define x '(0 1))
+(define y '(1 0))
+(set-car! x 1)
+(set-cdr! y 1)
+(car x)
+(cdr y)
