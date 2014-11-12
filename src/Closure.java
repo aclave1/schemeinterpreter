@@ -50,29 +50,29 @@ class Closure extends Node {
     public Node apply(Node args, Environment env) throws InvalidApplyException {
         try {
             Node params = fun.getCar();
-            Node code = fun.getCdr().getCar();
+            Node code = fun.getCdr();
 
             Environment bindings = bindParamsToArgs(params, args, new Environment(env));
 
-            Node c = code.eval(code,bindings);
-
-            return c;
+            return Begin.executeExpressions(code, bindings);
         } catch (Exception e) {
             throw new InvalidApplyException();
         }
     }
 
-    private Environment bindParamsToArgs(Node params, Node args,Environment env) throws InvalidArityException{
+    private Environment bindParamsToArgs(Node params, Node args, Environment env) throws InvalidArityException {
         Node key = params.getCar();
         Node val = args.getCar();
-        if(key == null && val == null){
+        if (key == null && val == null) {
             return env;
-        }else if(key != null && val == null){
+        } else if (key != null && val == null) {
             throw new InvalidArityException();
         }
-        val = val.eval(args,env);
-        env.define(key,val);
-        return bindParamsToArgs(params.getCdr(),args.getCdr(),env);
+
+        val = val.eval(args, env);
+
+        env.define(key, val);
+        return bindParamsToArgs(params.getCdr(), args.getCdr(), env);
     }
 
     @Override

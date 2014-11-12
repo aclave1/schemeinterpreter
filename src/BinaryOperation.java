@@ -16,12 +16,12 @@ public class BinaryOperation {
         }
     }
 
-    public static NodePair evaluateBinaryIntegerArgs(Node args, Environment env) throws InvalidArgumentException{
+    public static NodePair evaluateBinaryIntegerArgs(Node args, Environment env) throws InvalidArgumentException {
         NodePair pair = BinaryOperation.extractBinaryArgs(args);
         Node item1 = pair.item1.eval(pair.item1, env);
         Node item2 = pair.item2.eval(pair.item2, env);
         if (BinaryOperation.integerOperands(item1, item2)) {
-            return new NodePair(item1,item2);
+            return new NodePair(item1, item2);
         } else {
             throw new InvalidArgumentException();
         }
@@ -37,17 +37,17 @@ public class BinaryOperation {
      * @throws InvalidArgumentException
      */
     public static Node applyBinaryIntegerOperation(Node args, Environment env, BinaryArithmeticOperation op) throws InvalidArgumentException {
-        NodePair pair = evaluateBinaryIntegerArgs(args,env);
+        NodePair pair = evaluateBinaryIntegerArgs(args, env);
         IntLit i1 = (IntLit) pair.item1;
         IntLit i2 = (IntLit) pair.item2;
-        return new IntLit(op.operate(i1.getIntVal(),i2.getIntVal()));
+        return new IntLit(op.operate(i1.getIntVal(), i2.getIntVal()));
     }
 
     public static Node applyBinaryIntegerOperation(Node args, Environment env, BinaryComparisonOperation op) throws InvalidArgumentException {
         NodePair pair = evaluateBinaryIntegerArgs(args, env);
         IntLit i1 = (IntLit) pair.item1;
         IntLit i2 = (IntLit) pair.item2;
-        return new BooleanLit(op.operate(i1.getIntVal(),i2.getIntVal()));
+        return new BooleanLit(op.operate(i1.getIntVal(), i2.getIntVal()));
     }
 
 

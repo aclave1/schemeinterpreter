@@ -12,7 +12,6 @@ public class BuiltinMultiplication extends BuiltIn implements BinaryArithmeticOp
             return BinaryOperation.applyBinaryIntegerOperation(node,env, this);
         } catch (InvalidArgumentException e) {
             System.out.printf(InterpreterMessages.NON_INTEGER_MULTIPLICATION);
-            System.exit(0);
         }
         return null;
     }

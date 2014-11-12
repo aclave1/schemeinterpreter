@@ -28,7 +28,6 @@ public class Frame {
             scope.put(id.getName(), val);
         } catch (GetNameException g) {
             System.out.printf(DebugMessages.LITERAL_GETNAME_ERROR);
-            System.exit(1);
         }
     }
 

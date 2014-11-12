@@ -127,7 +127,7 @@ class Environment extends Node{
      */
     private Frame scopeContaining(Node id){
         Node existing = scope.find(id);
-        if(existing == null){
+        if(existing == null && env != null){
             return env.scopeContaining(id);
         }else{
             return scope;
@@ -141,14 +141,15 @@ class Environment extends Node{
      * @param id
      * @param val
      */
-    public void assign(Node id, Node val) {
+    public void assign(Node id, Node val) throws UndefinedVariableException {
         Node exists = scope.find(id);
         if (exists != null) {
             scope.set(id, val);
         } else if (exists == null && env != null) {
             env.assign(id, val);
         } else {
-            System.out.println(InterpreterMessages.UNDEFINED_VAR_ASSIGNMENT_ERROR);
+            System.out.printf(InterpreterMessages.UNDEFINED_VAR_ASSIGNMENT_ERROR,id);
+            throw new UndefinedVariableException();
         }
     }
 

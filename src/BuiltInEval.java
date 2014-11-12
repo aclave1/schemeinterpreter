@@ -8,13 +8,14 @@ public class BuiltInEval extends BuiltIn {
 
         NodePair argPair = BinaryOperation.extractBinaryArgs(args);
 
-        Node envArg = argPair.item2.eval(argPair.item2,env);
-        if(!(envArg instanceof Environment)){
+        Node envArg = argPair.item2.eval(argPair.item2, env);
+        if (!(envArg instanceof Environment)) {
             throw new InvalidApplyException("Eval requires an environment as second argument.");
         }
 
         Environment newEnv = (Environment) envArg;
-        Node toEval = argPair.item1.eval(argPair.item1,env);
-        return toEval.eval(toEval,newEnv);
+        Node toEval = argPair.item1.eval(argPair.item1, env);
+        return toEval.eval(toEval, newEnv);
+
     }
 }

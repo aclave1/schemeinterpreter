@@ -1,4 +1,4 @@
-public class BuiltInNumberCheck extends BuiltIn{
+public class BuiltInNumberCheck extends BuiltIn {
 
     public BuiltInNumberCheck(Node s) {
         super(s);
@@ -6,8 +6,9 @@ public class BuiltInNumberCheck extends BuiltIn{
 
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException {
-        if(args.getCar().eval(args.getCar(),env).isNumber()){
+        if (args.getCar().eval(args.getCar(), env).isNumber()) {
             return new BooleanLit(true);
-        }return new BooleanLit(false);
+        }
+        return new BooleanLit(false);
     }
 }

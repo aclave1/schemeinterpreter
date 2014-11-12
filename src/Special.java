@@ -51,7 +51,5 @@ abstract class Special extends Node{
     }
 
     public abstract String getText();
-
-    public abstract Node eval(Node node,Environment env);
 }
 

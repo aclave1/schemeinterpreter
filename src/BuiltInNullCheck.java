@@ -6,7 +6,7 @@ public class BuiltInNullCheck extends BuiltIn {
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException {
         Node isNull = args.getCar();
-        isNull = isNull.eval(isNull,env);
+        isNull = isNull.eval(isNull, env);
         return new BooleanLit(isNull.isNull());
     }
 }

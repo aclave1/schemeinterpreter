@@ -15,7 +15,6 @@ public class BuiltInEquals extends BuiltIn implements BinaryComparisonOperation 
             return BinaryOperation.applyBinaryIntegerOperation(args,env,this);
         } catch (Exception e) {
             System.out.printf(InterpreterMessages.NON_INTEGER_EQUALS);
-            System.exit(1);
         }
         return null;
     }

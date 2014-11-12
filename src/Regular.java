@@ -19,7 +19,7 @@ class Regular extends Special {
     }
 
     @Override
-    public Node eval(Node node, Environment env) {
+    public Node eval(Node node, Environment env){
 
         Node x = _node.eval(node, env);
         if(x == null){return x;}
@@ -28,7 +28,6 @@ class Regular extends Special {
                 return x.apply(node.cdr, env);
             } catch (InvalidApplyException e) {
                 System.out.printf(InterpreterMessages.NON_FUNCTION_APPLY);
-                System.exit(1);
             }
         }
         return x;

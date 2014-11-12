@@ -194,3 +194,8 @@ setme
 setme
 (set! setme '(1 2))
 setme
+(begin (define x 1)
+        (define y 2)
+        (set! zzzzzzz 1)
+        (b+ x y)
+)

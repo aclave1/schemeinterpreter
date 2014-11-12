@@ -7,7 +7,7 @@ public class InterpreterMessages {
     public static final String UNDEFINED_VAR = "error:undefined variable %s";
 
     public static final String IDENT_PRIMITIVE_ERROR = "Error:Cannot use primitive as identifier.\n";
-    public static final String UNDEFINED_VAR_ASSIGNMENT_ERROR = "Error:attempted assignment to an undefined value.\n";
+    public static final String UNDEFINED_VAR_ASSIGNMENT_ERROR = "Error: cannot set! undefined variable: %s\n";
     public static final String IDENT_LOOKUP_ERROR = "Error:Improper identifier\n";
     public static final String NON_FUNCTION_APPLY = "Error: non-operator in operator position. Attempted to call non-function as function.\n";
 
@@ -25,5 +25,5 @@ public class InterpreterMessages {
     public static final String INVALID_CDR = "Error:argument type is invalid for cdr. Expected pair.\n";
 
 
-
+    public static final String UNDEFINED_SET = "Error:Cannot set undefined variable:%s\n" ;
 }

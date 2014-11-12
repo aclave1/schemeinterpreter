@@ -18,7 +18,6 @@ public class BuiltInDivision extends BuiltIn implements BinaryArithmeticOperatio
             return BinaryOperation.applyBinaryIntegerOperation(args,env,this);
         } catch (InvalidArgumentException e) {
             System.out.printf(InterpreterMessages.NON_INTEGER_DIVISION);
-            System.exit(1);
         }
         return null;
     }

@@ -69,10 +69,6 @@ public class Main {
         Environment globalEnv = new Environment(builtinEnv);
 
 
-
-
-
-
         // Parse and pretty-print each input expression
         Node root = new Nil();
         try {
@@ -81,11 +77,16 @@ public class Main {
             System.out.printf(InterpreterMessages.INVALID_EOF);
         }
         while (root != null) {
-            Node results = root.eval(root,globalEnv);
-            if (results != null) {
-                results.print(0);
-            }else{
-                System.out.printf("no values returned");
+            try {
+                Node results = root.eval(root, globalEnv);
+                if (results != null) {
+                    results.print(0);
+                } else {
+                    System.out.printf("no values returned");
+                }
+
+            } catch (Exception e) {
+
             }
             System.out.printf("\n");
             root = parser.parseExp();
@@ -97,7 +98,7 @@ public class Main {
 
         /**specials*/
         Ident elseClause = new Ident(Keywords.ELSE);
-        env.define(elseClause,new Else());
+        env.define(elseClause, new Else());
 
         /**
          * binary arithmetic
@@ -123,58 +124,53 @@ public class Main {
 
         /**type checks*/
         Ident isSymbol = new Ident(Keywords.SYMBOLCHECK);
-        env.define(isSymbol,new BuiltInSymbolCheck(isSymbol));
+        env.define(isSymbol, new BuiltInSymbolCheck(isSymbol));
 
         Ident isNumber = new Ident(Keywords.NUMBERCHECK);
-        env.define(isNumber,new BuiltInNumberCheck(isNumber));
+        env.define(isNumber, new BuiltInNumberCheck(isNumber));
 
         Ident isProcedure = new Ident(Keywords.PROCEDURECHECK);
-        env.define(isProcedure,new BuiltInProcedureCheck(isProcedure));
+        env.define(isProcedure, new BuiltInProcedureCheck(isProcedure));
 
 
         /**list operations*/
 
         Ident car = new Ident(Keywords.CAR);
-        env.define(car,new BuiltInCar(car));
+        env.define(car, new BuiltInCar(car));
         Ident cdr = new Ident(Keywords.CDR);
-        env.define(cdr,new BuiltInCdr(cdr));
+        env.define(cdr, new BuiltInCdr(cdr));
 
         Ident setCar = new Ident(Keywords.SET_CAR);
-        env.define(setCar,new BuiltInSetCar(setCar));
+        env.define(setCar, new BuiltInSetCar(setCar));
         Ident setCdr = new Ident(Keywords.SET_CDR);
-        env.define(setCdr,new BuiltInSetCdr(setCdr));
+        env.define(setCdr, new BuiltInSetCdr(setCdr));
         Ident pairCheck = new Ident(Keywords.PAIRCHECK);
-        env.define(pairCheck,new BuiltInPairCheck(pairCheck));
+        env.define(pairCheck, new BuiltInPairCheck(pairCheck));
         Ident nullCheck = new Ident(Keywords.NULLCHECK);
-        env.define(nullCheck,new BuiltInNullCheck(nullCheck));
+        env.define(nullCheck, new BuiltInNullCheck(nullCheck));
 
 
         /**cons*/
         Ident cons = new Ident(Keywords.CONS);
-        env.define(cons,new BuiltInCons(cons));
+        env.define(cons, new BuiltInCons(cons));
         Ident quote = new Ident(Keywords.QUOTE);
-        env.define(quote,new BuiltInCons(quote));
+        env.define(quote, new BuiltInCons(quote));
         Ident quoteWord = new Ident(Keywords.QUOTE_WORD);
-        env.define(quoteWord,new BuiltInCons(quoteWord));
+        env.define(quoteWord, new BuiltInCons(quoteWord));
 
         Ident eq = new Ident(Keywords.OBJECT_EQUALS);
-        env.define(eq,new BuiltInObjectEquals(eq));
+        env.define(eq, new BuiltInObjectEquals(eq));
 
 
         /**eval, apply, interaction-environment*/
         Ident eval = new Ident(Keywords.EVAL);
-        env.define(eval,new BuiltInEval(eval));
+        env.define(eval, new BuiltInEval(eval));
 
         Ident apply = new Ident(Keywords.APPLY);
-        env.define(apply,new BuiltInApply(apply));
+        env.define(apply, new BuiltInApply(apply));
 
         Ident interEnv = new Ident(Keywords.INTERACTION_ENVIRONMENT);
-        env.define(interEnv,new BuiltInInteractionEnvironment(interEnv));
-
-
-
-
-
+        env.define(interEnv, new BuiltInInteractionEnvironment(interEnv));
 
 
     }

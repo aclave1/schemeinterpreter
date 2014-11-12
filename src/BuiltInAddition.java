@@ -9,7 +9,6 @@ public class BuiltInAddition extends BuiltIn implements BinaryArithmeticOperatio
             return BinaryOperation.applyBinaryIntegerOperation(args,env,this);
         } catch (InvalidArgumentException e) {
             System.out.printf("Attempted to add one or more non-integers");
-            System.exit(0);
         }
         throw new InvalidApplyException();
     }

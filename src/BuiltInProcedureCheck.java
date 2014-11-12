@@ -1,4 +1,4 @@
-public class BuiltInProcedureCheck extends BuiltIn{
+public class BuiltInProcedureCheck extends BuiltIn {
 
     public BuiltInProcedureCheck(Node s) {
         super(s);
@@ -6,6 +6,6 @@ public class BuiltInProcedureCheck extends BuiltIn{
 
 
     public Node apply(Node args, Environment env) throws InvalidApplyException {
-        return args.getCar().eval(args,env).isProcedure() ? new BooleanLit(true) : new BooleanLit(false);
+        return args.getCar().eval(args, env).isProcedure() ? new BooleanLit(true) : new BooleanLit(false);
     }
 }

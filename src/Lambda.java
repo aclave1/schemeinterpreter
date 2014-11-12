@@ -14,7 +14,6 @@ class Lambda extends Special {
 
     @Override
     public Node eval(Node node, Environment env) {
-        throw new Error("NotImplemented: no implicit begin");
-//        return new Closure(node.getCdr(),env);
+        return new Closure(node.getCdr(),env);
     }
 }
