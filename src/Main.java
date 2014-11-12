@@ -173,6 +173,20 @@ public class Main {
         env.define(interEnv, new BuiltInInteractionEnvironment(interEnv));
 
 
+        /**io*/
+
+        Ident newline = new Ident(Keywords.IONEWLINE);
+        env.define(newline,new BuiltInNewLine(newline));
+
+        Ident read = new Ident(Keywords.IOREAD);
+        env.define(read,new BuiltInRead(read));
+
+        Ident write = new Ident(Keywords.IOWRITE);
+        env.define(write,new BuiltInWrite(write));
+
+        Ident display = new Ident(Keywords.IODISPLAY);
+        env.define(display,new BuiltInDisplay(display));
+
     }
 
 
