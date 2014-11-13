@@ -28,4 +28,5 @@ public class InterpreterMessages {
     public static final String UNDEFINED_SET = "Error:Cannot set undefined variable:%s" ;
     public static final String INVALID_SETCAR = "Error: Cannot set-car of %s";
     public static final String INVALID_SETCDR = "Error: Cannot set-cdr of %s";
+    public static final String INVALID_ARITY = "Error:function call has improper arity";
 }
