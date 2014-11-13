@@ -1,2 +1,6 @@
-(define x "written")
-(write x)
+(define x '(0 1))
+(define y '(1 0))
+(set-car! x 1)
+(set-cdr! y 1)
+(car x)
+(cdr y)

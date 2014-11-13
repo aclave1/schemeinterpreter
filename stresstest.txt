@@ -224,6 +224,8 @@ setme
     (b+ x y)
 );;10002
 
+
+
 (define x (cons 1 2))
 (set-car! x 3)
 x;;(1 2)
@@ -242,16 +244,3 @@ y
 (set-cdr! y 1)
 (car x)
 (cdr y)
-
-"newlines"
-(newline)
-(newline)
-(newline)
-(b+ 1 1)
-(newline)
-(b+ 1 1)
-(newline)
-(newline)
-(newline)
-(newline)
-(b+ 1 1)
