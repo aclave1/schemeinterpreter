@@ -15,7 +15,7 @@ public class BuiltInCdr extends BuiltIn{
 
 
         try {
-            return getCdrOf.getCdr().getCar();
+            return getCdrOf.getCdr();
         } catch (NullPointerException e) {
             return new Nil(InterpreterMessages.INVALID_CDR);
         }
