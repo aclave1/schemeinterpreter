@@ -61,6 +61,13 @@ class Closure extends Node {
     }
 
     public static Environment bindParamsToArgs(Node params, Node args, Environment env) throws InvalidArityException {
+        if(params.isNull()) return env;
+        if (params.isDot()){
+
+            Node key = params.getCar();
+            env.define(key,args);
+            return env;
+        }
         Node key = params.getCar();
         Node val = args.getCar();
         if (key == null && val == null) {

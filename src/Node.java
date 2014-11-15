@@ -56,10 +56,13 @@ abstract class Node {
     public boolean isPair() {
         return false;
     }  // Cons
+    public boolean isDot() {
+        return false;
+    }  // Cons
 
 
     public Node getCar() {
-        return car;
+        return car != null ? car : this;
     }
 
     public Node getCdr() {
