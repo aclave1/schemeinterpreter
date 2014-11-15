@@ -6,7 +6,7 @@ public class BuiltInEval extends BuiltIn {
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException {
 
-        NodePair argPair = BinaryOperation.extractBinaryArgs(args);
+        NodePair argPair = BinaryOperation.extractBinaryArgs(args,env);
 
         Node envArg = argPair.item2.eval(argPair.item2, env);
         if (!(envArg instanceof Environment)) {

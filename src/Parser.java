@@ -81,7 +81,7 @@ class Parser {
         int tokenType = token.getType();
 
         if (tokenType == TokenType.DOT) {
-            return new Cons(parseExp(), parseRest());
+            return new Dot(parseExp(), parseRest());
         } else if (tokenType == TokenType.RPAREN) {
             return new Nil();
         } else {

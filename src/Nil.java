@@ -3,6 +3,7 @@ class Nil extends Node {
     public String rparen = ")";
     public String parens = "(%s)";
     private boolean printOnlyright = false;
+    private boolean printNothing = false;
     private String _errorMessage = null;
 
 
@@ -14,7 +15,12 @@ class Nil extends Node {
     }
 
     public Nil(boolean b) {
-        printOnlyright = b;
+        this(b,false);
+    }
+    public Nil(boolean onlyR,boolean noprint)
+    {
+        printOnlyright = onlyR;
+        printNothing = noprint;
     }
 
     public boolean isNull() {
@@ -27,6 +33,7 @@ class Nil extends Node {
     }
 
     public void print(int n, boolean p) {
+        if(printNothing == true){return;}
         if (p || printOnlyright) {
             System.out.printf(rparen);
         } else {
@@ -47,5 +54,13 @@ class Nil extends Node {
     @Override
     public Node eval(Node node, Environment env) {
         throw new Error(DebugMessages.CANNOT_EVAL);
+    }
+
+    /**
+     * Returns a new non-printing Nil
+     * @return
+     */
+    public static Node noPrint() {
+        return new Nil(false,true);
     }
 }

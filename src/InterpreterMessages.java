@@ -16,6 +16,8 @@ public class InterpreterMessages {
     public static final String NON_INTEGER_MULTIPLICATION = "Error:Attempted to multiply one or more non-integers\n";
     public static final String NON_INTEGER_DIVISION = "Error:Attempted to divide one or more non-integers\n";
 
+    public static final String INVALID_NUM_ARGS = "Error: Improper number of arguments, expected %d";
+
 
     public static final String NON_INTEGER_EQUALS= "Error:Attempted to check integer equality on one or more non-integers\n";
     public static final String NON_INTEGER_LT = "Error:Attempted comparison on one or more non-integers\n";
@@ -29,4 +31,7 @@ public class InterpreterMessages {
     public static final String INVALID_SETCAR = "Error: Cannot set-car of %s";
     public static final String INVALID_SETCDR = "Error: Cannot set-cdr of %s";
     public static final String INVALID_ARITY = "Error:function call has improper arity";
+
+    public static final String INVALID_INT_FORMAT = "Error: invalid number format.\n";
+    public static final String SCANNER_ERROR = "Error: invalid input syntax.\n" ;
 }

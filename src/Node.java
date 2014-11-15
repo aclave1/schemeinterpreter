@@ -56,6 +56,7 @@ abstract class Node {
     public boolean isPair() {
         return false;
     }  // Cons
+    public boolean isDot() {return false;}
 
 
     public Node getCar() {

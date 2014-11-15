@@ -10,6 +10,6 @@ public class BuiltInWrite extends BuiltIn{
         if(car == null){return new Nil(InterpreterMessages.INVALID_ARITY);}
         Node nodeToPrint = car.eval(car,env);
         nodeToPrint.print(0);
-        return new Nil("Unspecific");
+        return Nil.noPrint();
     }
 }

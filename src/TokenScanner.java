@@ -26,131 +26,147 @@ public class TokenScanner {
 
         char ch = (char) bite;
 
-        // Special characters
-        if (ch == '\'')
-            return new Token(Token.QUOTE);
-            //whitespace
-        else if (isWhiteSpace(ch)) {
-            return getNextToken();
-        } else if (isComment(ch)) {
+        try {
+            // Special characters
+            if (ch == '\'')
+                return new Token(Token.QUOTE);
+                //whitespace
+            else if (isWhiteSpace(ch)) {
+                return getNextToken();
+            } else if (isComment(ch)) {
 
-            char c = (char) tryRead(in);
+                char c = (char) tryRead(in);
 
-            while (!isEndOfLine(c)) {
-                c = (char) tryRead(in);
+                while (!isEndOfLine(c)) {
+                    c = (char) tryRead(in);
+                }
+                return getNextToken();
+            } else if (ch == '(')
+                return new Token(Token.LPAREN);
+            else if (ch == ')')
+                return new Token(Token.RPAREN);
+            else if (ch == '.')
+                // We ignore the special identifier `...'.
+                return new Token(Token.DOT);
+
+                // Boolean constants
+            else if (ch == '#') {
+                try {
+                    bite = in.read();
+                } catch (IOException e) {
+                    System.err.println("We fail: " + e.getMessage());
+                }
+
+                if (bite == -1) {
+                    System.err.println("Unexpected EOF following #");
+                    return null;
+                }
+                ch = (char) bite;
+                if (ch == 't')
+                    return new Token(Token.TRUE);
+                else if (ch == 'f')
+                    return new Token(Token.FALSE);
+                else {
+                    System.err.println("Illegal character '" + (char) ch + "' following #");
+                    return getNextToken();
+                }
             }
-            return getNextToken();
-        } else if (ch == '(')
-            return new Token(Token.LPAREN);
-        else if (ch == ')')
-            return new Token(Token.RPAREN);
-        else if (ch == '.')
-            // We ignore the special identifier `...'.
-            return new Token(Token.DOT);
 
-            // Boolean constants
-        else if (ch == '#') {
-            try {
-                bite = in.read();
-            } catch (IOException e) {
-                System.err.println("We fail: " + e.getMessage());
+            // String constants
+            else if (isQuote(ch)) {
+                int i = 0;
+                char c = (char) tryRead(in);
+
+                while (!isQuote(c)) {
+                    //the user might be trying to escape something
+                    if (c == '\\') {
+                        char escaped = (char) tryRead(in);
+                        if (isEscapedChar(c, escaped)) {
+                            buf[i] = (byte) escaped;
+                        } else {
+                            //just a random backslash
+                            System.err.println("Illegal character encountered in string, returning error string");
+                            return new StrToken("Error: String Format Exception");
+                        }
+                    } else {
+                        buf[i] = (byte) c;
+                    }
+                    i++;
+                    c = (char) tryRead(in);
+                }
+
+                String quotedString = new String(Arrays.copyOfRange(buf, 0, i));
+                return new StrToken(quotedString);
             }
 
-            if (bite == -1) {
-                System.err.println("Unexpected EOF following #");
-                return null;
+            // Integer constants
+            else if (isNumber(ch)) {
+
+                char[] intChars = new char[20];
+                intChars[0] = ch;
+                int i = 1;
+                char c = (char) tryRead(in);
+
+                while (!isDelimiter(c)) {
+                    if (i == intSize) throw new ArrayIndexOutOfBoundsException();
+                    intChars[i] = c;
+                    c = (char) tryRead(in);
+                    i++;
+                }
+
+                int tokenValue = 0;
+
+                try {
+                    tokenValue = Integer.parseInt(new String(Arrays.copyOfRange(intChars, 0, i)));
+                } catch (NumberFormatException e) {
+                    System.out.printf(InterpreterMessages.INVALID_INT_FORMAT);
+                    throw new Exception();
+                }
+
+
+                // put the character after the integer back into the input
+                tryUnread(in, c);
+                return new IntToken(tokenValue);
             }
-            ch = (char) bite;
-            if (ch == 't')
-                return new Token(Token.TRUE);
-            else if (ch == 'f')
-                return new Token(Token.FALSE);
+            // Identifiers
+            else if (isValidInitial(ch)) {
+
+                buf[0] = (byte) ch;
+
+
+                int i = 1;
+                char c = (char) tryRead(in);
+
+                while (isValidSubsequent(c)) {
+                    buf[i] = (byte) c;
+                    c = (char) tryRead(in);
+                    if (i == bufSize - 1) throw new ArrayIndexOutOfBoundsException();
+                    i++;
+                }
+
+                //only copy what matters to the string
+                String ident = new String(Arrays.copyOfRange(buf, 0, i)).toLowerCase();
+
+                buf = new byte[bufSize];
+
+
+                // put the character after the identifier back into the input
+                tryUnread(in, c);
+                return new IdentToken(ident);
+            }
+
+            // Illegal character
             else {
-                System.err.println("Illegal character '" + (char) ch + "' following #");
+                System.err.println("Illegal input character '" + (char) ch + '\'');
                 return getNextToken();
             }
+
+
+        } catch (Exception e) {
+            System.out.printf(InterpreterMessages.SCANNER_ERROR);
         }
 
-        // String constants
-        else if (isQuote(ch)) {
-            int i = 0;
-            char c = (char) tryRead(in);
-
-            while (!isQuote(c)) {
-                //the user might be trying to escape something
-                if (c == '\\') {
-                    char escaped = (char) tryRead(in);
-                    if (isEscapedChar(c, escaped)) {
-                        buf[i] = (byte) escaped;
-                    } else {
-                        //just a random backslash
-                        System.err.println("Illegal character encountered in string, returning error string");
-                        return new StrToken("Error: String Format Exception");
-                    }
-                } else {
-                    buf[i] = (byte) c;
-                }
-                i++;
-                c = (char) tryRead(in);
-            }
-
-            String quotedString = new String(Arrays.copyOfRange(buf, 0, i));
-            return new StrToken(quotedString);
-        }
-
-        // Integer constants
-        else if (isNumber(ch)) {
-
-            char[] intChars = new char[20];
-            intChars[0] = ch;
-            int i = 1;
-            char c = (char) tryRead(in);
-
-            while (!isDelimiter(c)) {
-                if (i == intSize) throw new ArrayIndexOutOfBoundsException();
-                intChars[i] = c;
-                c = (char) tryRead(in);
-                i++;
-            }
-
-            int tokenValue = Integer.parseInt(new String(Arrays.copyOfRange(intChars, 0, i)));
-
-            // put the character after the integer back into the input
-            tryUnread(in, c);
-            return new IntToken(tokenValue);
-        }
-        // Identifiers
-        else if (isValidInitial(ch)) {
-
-            buf[0] = (byte) ch;
-
-
-            int i = 1;
-            char c = (char) tryRead(in);
-
-            while (isValidSubsequent(c)) {
-                buf[i] = (byte) c;
-                c = (char) tryRead(in);
-                if (i == bufSize - 1) throw new ArrayIndexOutOfBoundsException();
-                i++;
-            }
-
-            //only copy what matters to the string
-            String ident = new String(Arrays.copyOfRange(buf, 0, i)).toLowerCase();
-
-            buf = new byte[bufSize];
-
-
-            // put the character after the identifier back into the input
-            tryUnread(in, c);
-            return new IdentToken(ident);
-        }
-
-        // Illegal character
-        else {
-            System.err.println("Illegal input character '" + (char) ch + '\'');
-            return getNextToken();
-        }
+        return getNextToken();
     }
 
     private int tryRead(PushbackInputStream str) {
@@ -281,8 +297,8 @@ public class TokenScanner {
                 c == '(' ||
                 c == ')' ||
                 c == ';' ||
-                c == (char)-1 ||
-                c == (char)65525 ||
+                c == (char) -1 ||
+                c == (char) 65525 ||
                 isQuote(c) ||
                 isEndOfLine(c)
         );

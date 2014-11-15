@@ -59,6 +59,8 @@ public class Main {
 
             } catch (Exception e) {
 
+
+
             }
             System.out.printf("\n");
             root = parser.parseExp();

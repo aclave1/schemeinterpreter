@@ -6,7 +6,7 @@ public class BuiltInObjectEquals extends BuiltIn {
 
     @Override
     public Node apply(Node args, Environment env) throws InvalidApplyException {
-        NodePair argPair = BinaryOperation.extractBinaryArgs(args);
+        NodePair argPair = BinaryOperation.extractBinaryArgs(args,env);
 
         Node item1 = argPair.item1.eval(argPair.item1, env);
         Node item2 = argPair.item2.eval(argPair.item2, env);

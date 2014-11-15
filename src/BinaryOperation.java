@@ -1,10 +1,17 @@
 public class BinaryOperation {
 
+    public static final int numargs = 2;
 
-    public static NodePair extractBinaryArgs(Node args) {
+    public static NodePair extractBinaryArgs(Node args,Environment env) {
         NodePair pair = new NodePair();
         pair.item1 = args.getCar();
+
         pair.item2 = args.getCdr().getCar();
+        if(pair.item1 == null || pair.item2 == null) System.out.printf(String.format(InterpreterMessages.INVALID_NUM_ARGS,numargs));
+
+        pair.item1 = pair.item1.eval(pair.item1,env);
+        pair.item2 = pair.item2.eval(pair.item2,env);
+
         return pair;
     }
 
@@ -17,7 +24,7 @@ public class BinaryOperation {
     }
 
     public static NodePair evaluateBinaryIntegerArgs(Node args, Environment env) throws InvalidArgumentException {
-        NodePair pair = BinaryOperation.extractBinaryArgs(args);
+        NodePair pair = BinaryOperation.extractBinaryArgs(args,env);
         Node item1 = pair.item1.eval(pair.item1, env);
         Node item2 = pair.item2.eval(pair.item2, env);
         if (BinaryOperation.integerOperands(item1, item2)) {
