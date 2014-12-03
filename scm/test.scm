@@ -24,3 +24,4 @@
 (length '(1 2 3 4 5 (6 7)))
 (append '(1 2) 4)
 (reverse '(1 2 3))
+(and #t #t 1)

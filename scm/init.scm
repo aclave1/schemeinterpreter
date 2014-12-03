@@ -22,9 +22,17 @@
 (define (list . x) (cons (car x) (cdr x)))
 (define (length l) (if (null? l) 0 (+ 1 (length (cdr l)))))
 (define (append l x)(if (null? l) x (cons (car l) (append (cdr l) x))))
+(define (last . l) (if(= (length l) 1) (car l) (apply last (cdr l))))
 (define (reverse l)
     (let (acc '())
         (append acc (car l))
         (reverse (cdr l) acc)))
+
+(define (and . l)
+    (if (eq? #t (car l))
+        (apply and (cdr l))
+        #f))
+
+(define (or . l) (if (eq? (car l) #f) (apply or (cdr l)) (car l)))
 
 
