@@ -48,3 +48,6 @@
 (even 1)
 (even -3)
 (even -1)
+(define (double x) (+ x x))
+(map double '(1 2 3))
+(for-each display '(1 2 3))

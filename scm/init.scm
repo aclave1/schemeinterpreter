@@ -38,3 +38,13 @@
 (define (odd x) (cond ((= x 0) #t) ((= x 1) #f) (else (odd (abs(- 2 x))))))
 (define (even x) (not (odd x)))
 
+(define (map f l)
+    (if (null? l) l
+        (cons (f (car l)) (map f (cdr l)))))
+
+(define (for-each f l)
+    (if (not (null? l))
+        (begin
+            (f (car l))
+            (for-each f (cdr l)))))
+
