@@ -25,3 +25,26 @@
 (append '(1 2) 4)
 (reverse '(1 2 3))
 (and #t #t 1)
+
+(odd 2)
+(odd 4)
+(odd -4)
+(newline)
+(odd 1)
+(odd 3)
+(odd -3)
+
+(newline)
+(newline)
+
+(even 4)
+(even -4)
+(even -2)
+(even -2)
+
+(newline)
+
+(even 3)
+(even 1)
+(even -3)
+(even -1)

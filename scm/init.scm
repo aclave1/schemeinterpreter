@@ -35,4 +35,6 @@
 
 (define (or . l) (if (eq? (car l) #f) (apply or (cdr l)) (car l)))
 
+(define (odd x) (cond ((= x 0) #t) ((= x 1) #f) (else (odd (abs(- 2 x))))))
+(define (even x) (not (odd x)))
 
