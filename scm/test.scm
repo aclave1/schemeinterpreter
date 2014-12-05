@@ -57,3 +57,7 @@
 (for-each display '(1 2 3))
 (for-each (lambda (x) (newline) (display x))
                 (list 57 321 88))
+
+(memq 'a '( f p a q  b c))
+(memv 'a '( f p a q  b c))
+(member 'a '( f p a q  b c))

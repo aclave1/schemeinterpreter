@@ -69,6 +69,22 @@
         ((memv? (car l) s) (cons (car l) (intersection (cdr l) s)))
         (else (intersection (cdr l) s))))
 
+;;
+;; iterates over the list and returns l if pred function is true when called with x and l as args
+(define (retlist pred x l)
+    (cond
+        ((null? l) #f)
+        ((pred x (car l)) l)
+        (else (memq x (cdr l)))))
+
+(define (memq x l)
+    (retlist eq? x l))
+(define (memv x l)
+    (retlist eqv? x l))
+(define (member x l)
+    (retlist equal? x l))
+;;;;;
+
 
 (define (caar l) (car (car l)))
 (define (caaar l) (car (car (car l))))
