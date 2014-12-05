@@ -61,3 +61,7 @@
 (memq 'a '( f p a q  b c))
 (memv 'a '( f p a q  b c))
 (member 'a '( f p a q  b c))
+(define e '((a 1) (b 2) (c 3)))
+(assq 'a e)
+(assv 'a e)
+(assoc 'a e)
