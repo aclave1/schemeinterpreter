@@ -6,6 +6,10 @@
 
 (assert (= (b+ 1 1) 2))
 (assert (= (+ 1 2 3) 6))
+(assert (= (- 5 2 1) 2))
+(assert (= (- 8 1 -1 1) 7))
+
+
 (assert (= (* 2 2 3) 12))
 
 (< 1 2 3)
@@ -51,3 +55,5 @@
 (define (double x) (+ x x))
 (map double '(1 2 3))
 (for-each display '(1 2 3))
+(for-each (lambda (x) (newline) (display x))
+                (list 57 321 88))
