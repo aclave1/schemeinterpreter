@@ -1,7 +1,4 @@
 ;;overwrites the scheme48 builtin functions
-
-
-
 (define builtin-+ +)
 (define (b+ x y) (builtin-+ x y))
 (define builtin- -)
