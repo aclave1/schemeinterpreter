@@ -1,16 +1,9 @@
-
-
-
 (define (= x y . l) (if (b= x y) (if (not (null? (cdr l)))) (= y (car l) (cdr l)) (= y (car l))))
 
 (define (< x y . l) (if (b< x y) (if (not (null? (cdr l)))) (< y (car l) (cdr l)) (< y (car l))))
 (define (> x y . l) (if (b> x y) (if (not (null? (cdr l)))) (> y (car l) (cdr l)) (> y (car l))))
 (define (<= x y . l) (if (b<= x y) (if (not (null? (cdr l)))) (<= y (car l) (cdr l)) (<= y (car l))))
 (define (>= x y . l) (if (b>= x y) (if (not (null? (cdr l)))) (>= y (car l) (cdr l)) (>= y (car l))))
-
-
-
-
 
 (define (zero? x) (if (= x 0) #t #f))
 (define (positive? x) (> x 0))
@@ -52,14 +45,6 @@
         (append acc (car l))
         (reverse (cdr l) acc)))
 
-
-
-
-
-
-
-
-;;
 ;; iterates over the list and returns l if pred function is true when called with x and l as args
 (define (retlist pred x l)
     (cond
@@ -84,9 +69,6 @@
 (define (assq x l)(assochelper eq? x l))
 (define (assv x l)(assochelper eqv? x l))
 (define (assoc x l)(assochelper equal? x l))
-;;
-
-
 
 (define (unary-map f l)
     (if (null? l) l
@@ -94,20 +76,18 @@
 (define (map f . l)
     (if (null? (car l)) '()
         (cons (apply f (unary-map car l)) (apply map f (unary-map cdr l)))))
-
 (define (for-each f . l)
     (if (not (null? (car l)))
         (begin
             (apply f (map car l))
             (apply for-each f (map cdr l)))))
 
-
-
 (define (intersection l s)
     (cond
         ((null? l) '())
         ((memv? (car l) s) (cons (car l) (intersection (cdr l) s)))
         (else (intersection (cdr l) s))))
+
 
 (define (caar  l)(car (car l)))
 (define (cadr l)(car (cdr l)))

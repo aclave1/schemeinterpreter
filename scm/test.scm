@@ -3,7 +3,7 @@
 (define (assert pred) (if pred (display "")(display "failed\n")))
 (newline)
 (newline)
-"move this string to mark what test failed in your code"
+"move this string around to mark what test failed in your code"
 (newline)
 (newline)
 (assert (= (b+ 1 1) 2))
@@ -62,6 +62,14 @@
 (assert (equal? (assoc 'a e) '(a 1)))
 (assert (equal? (map + '(1 1) '(2 2)) '(3 3)))
 (assert (equal? (map * '(1 1) '(2 2)) '(2 2)))
+
+(assert (eq? (equal? '(1 2) '(1 2)) #t))
+(assert (eq? (equal? "alex" "alex") #t))
+
+(assert (eq? (eq? 1 1)#t))
+(assert (eq? (eq? 1 2)#f))
+
+
 (define (ddisplay x y)
     (begin (display x)(display" ")(display y)(display" ")))
 (for-each ddisplay '(good your for-each ) '( job n-ary works))
