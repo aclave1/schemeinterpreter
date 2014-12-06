@@ -1,6 +1,6 @@
 (load "builtin.scm")
 (load "init.scm")
-(define (assert pred) (if pred (display "passed\n")(display "failed\n")))
+(define (assert pred) (if pred (display "")(display "failed\n")))
 (newline)
 (newline)
 "move this string to mark what test failed in your code"
@@ -51,7 +51,8 @@
 (define (double x) (+ x x))
 (assert (equal? (map double '(1 2 3)) '(2 4 6)))
 (assert (equal? (map + '(1 1) '(2 2) '(3 3)) '(6 6)))
-(for-each display '(if you see this good job your unary for-each works))
+(for-each display '( good job ))
+(newline)
 (assert (equal? (memq 'a '( f p a q  b c)) '(a q b c) ))
 (assert (equal? (memv 'a '( f p a q  b c)) '(a q b c) ))
 (assert (equal? (member 'a '( f p a q  b c)) '(a q b c) ))
@@ -63,6 +64,4 @@
 (assert (equal? (map * '(1 1) '(2 2)) '(2 2)))
 (define (ddisplay x y)
     (begin (display x)(display" ")(display y)(display" ")))
-(for-each ddisplay '(good your for-each ) '( job binary works))
-
-
+(for-each ddisplay '(good your for-each ) '( job n-ary works))
