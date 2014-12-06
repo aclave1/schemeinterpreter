@@ -17,6 +17,9 @@
 (>= 3 3 2 2 1 1)
 (<= 1 1 2 2 3 3)
 
+(= 1 1 1 1)
+(= 1 1 1 2)
+
 (assert (= (max 1 2 3 4 3 2 1) 4))
 (zero? 1)
 (zero? 0)
@@ -29,6 +32,7 @@
 (append '(1 2) 4)
 (reverse '(1 2 3))
 (and #t #t 1)
+(and #t #f "if you see this you failed")
 
 (odd? 2)
 (odd? 4)

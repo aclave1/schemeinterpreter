@@ -39,9 +39,8 @@
         (reverse (cdr l) acc)))
 
 (define (and . l)
-    (if (eq? #t (car l))
-        (apply and (cdr l))
-        #f))
+    (if (null? (cdr l)) (car l)
+        (if (eq? (car l) #f) #f (apply and (cdr l)))))
 
 (define (or . l) (if (eq? (car l) #f) (apply or (cdr l)) (car l)))
 
