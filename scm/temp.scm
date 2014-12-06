@@ -1,7 +1,12 @@
-(define (and . l)
-    (if (null? (cdr l)) (car l)
-        (if (eq? (car l) #f) #f (apply and (cdr l)))))
+(define (eqv? x y)
+    (if (eq? (car x) (car y))
+        (eqv? (cdr x) (cdr y))
+        #f))
+
+(eqv? "cat" "cat")
+
+(define (nexecute x)())
 
 
-(and (= 1 1) 1 "chicken" )
+
 

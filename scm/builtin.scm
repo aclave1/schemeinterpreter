@@ -1,6 +1,5 @@
 ;;overwrites the scheme48 builtin functions
 
-(define (assert pred) (if pred (display "passed\n")(display "failed\n")))
 
 
 (define builtin-+ +)
