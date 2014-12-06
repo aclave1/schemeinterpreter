@@ -69,3 +69,8 @@
 
 (map + '(1 1) '(2 2))
 (map * '(3 3) '(2 2))
+
+(define (ddisplay x y)
+    (begin (display x)(display":")(display y)(newline)))
+
+(for-each ddisplay '(1 2) '(3 4))

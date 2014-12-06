@@ -15,12 +15,15 @@
     (if (null? (car l)) '()
         (cons (apply f (unary-map car l)) (apply map f (unary-map cdr l)))))
 
+(define (for-each f . l)
+    (if (not (null? (car l)))
+        (begin
+            (apply f (map car l))
+            (apply for-each f (map cdr l)))))
 
-(map + '(1 1) '(2 2))
-;(extractcars '(1 2) '(3 4) '(5 6))
-;(extractcdrs '(1 2) '(3 4) '(5 6))
+(define (ddisplay x y)
+    (begin (display x)(display":")(display y)(newline)))
 
-
-(define lst '((1 2) (3 4) (5 6)))
+(for-each ddisplay '(1 2) '(3 4))
 
 
