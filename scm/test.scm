@@ -8,7 +8,7 @@
 (assert (= (+ 1 2 3) 6))
 (assert (= (- 5 2 1) 2))
 (assert (= (- 8 1 -1 1) 7))
-
+(assert (= 42))
 
 (assert (= (* 2 2 3) 12))
 
@@ -54,6 +54,7 @@
 (even -1)
 (define (double x) (+ x x))
 (map double '(1 2 3))
+(map + '(1 1) '(2 2) '(3 3))
 (for-each display '(1 2 3))
 (for-each (lambda (x) (newline) (display x))
                 (list 57 321 88))
@@ -65,3 +66,6 @@
 (assq 'a e)
 (assv 'a e)
 (assoc 'a e)
+
+(map + '(1 1) '(2 2))
+(map * '(3 3) '(2 2))

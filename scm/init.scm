@@ -48,15 +48,25 @@
 (define (odd x) (cond ((= x 0) #t) ((= x 1) #f) (else (odd (abs (- 2 x))))))
 (define (even x) (not (odd x)))
 
-(define (map f l)
-    (if (null? l) l
-        (cons (f (car l)) (map f (cdr l)))))
 
-(define (for-each f l)
+(define (unary-map f l)
+    (if (null? l) l
+        (cons (f (car l)) (unary-map f (cdr l)))))
+
+(define (unary-foreach f l)
     (if (not (null? l))
         (begin
             (f (car l))
-            (for-each f (cdr l)))))
+            (unary-foreach f (cdr l)))))
+
+;;n-ary map
+(define (map f . l)
+    (let ((extract (ll)(cons (caar ll) (extract (cdr ll)))))
+        (apply unary-map (extract l))
+        (map f (cdr l))))
+
+
+
 (define (memv? x l)
     (if (null? l) #f
         (if (eq? x (car l))
@@ -95,6 +105,8 @@
 (define (assv x l)(assochelper eqv? x l))
 (define (assoc x l)(assochelper equal? x l))
 ;;
+
+
 
 
 
