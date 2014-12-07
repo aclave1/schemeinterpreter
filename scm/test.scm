@@ -36,9 +36,9 @@
 (assert(eq? (and #t #t #t 1) 1))
 
 (assert (= (and #t #t 1) 1))
-(assert (equal? (and #t #f "if you see this you failed") #f))
+(assert (eq? (and #t #f "if you see this you failed") #f))
 
-(assert (equal? (or #f #f 1) 1))
+(assert (eq? (or #f #f 1) 1))
 (assert (equal? (list 1 2 3) '(1 2 3)))
 (assert (= (length '(1 2 3)) 3))
 (assert (= (length(list 1 2 3)) 3))
