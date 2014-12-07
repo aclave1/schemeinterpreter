@@ -9,10 +9,12 @@
 (assert (= 1 1))
 (assert (= 2 2))
 (assert (= -1 -1))
+(assert (b= 1 1))
 (assert (= (- 5 2 1) 2))
 (assert (= (- 8 1 -1 1) 7))
 (assert (= 42))
 (assert (= (* 2 2 3) 12))
+"move this string around to mark what test failed in your code"
 (assert (eq? (< 1 2 3) #t))
 (assert (eq? (<= 1 1 2 2 3 3) #t))
 (assert (eq? (>= 3 3 2 2 1 1) #t))
@@ -87,5 +89,4 @@
 (define (ddisplay x y)
     (begin (display x)(display" ")(display y)(display" ")))
 (for-each ddisplay '(good your for-each ) '( job n-ary works))
-
 (assert (= (max 1) 1))
