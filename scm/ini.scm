@@ -1,30 +1,45 @@
-(define (= x y . l) (if (b= x y) (if (not (null? (cdr l)))) (= y (car l) (cdr l)) (= y (car l))))
+(define (listcomp f x . l)
+    (cond
+        ((null? l) #t)
+        ((f x (car l)) (apply listcomp f x (cdr l)))
+        (else #f)))
 
-(define (< x y . l) (if (b< x y) (if (not (null? (cdr l)))) (< y (car l) (cdr l)) (< y (car l))))
-(define (> x y . l) (if (b> x y) (if (not (null? (cdr l)))) (> y (car l) (cdr l)) (> y (car l))))
-(define (<= x y . l) (if (b<= x y) (if (not (null? (cdr l)))) (<= y (car l) (cdr l)) (<= y (car l))))
-(define (>= x y . l) (if (b>= x y) (if (not (null? (cdr l)))) (>= y (car l) (cdr l)) (>= y (car l))))
+(define (< x . l)(apply listcomp b< x l))
+(define (<= x . l)(apply listcomp b<= x l))
+(define (= x . l)(apply listcomp b= x l))
+(define (> x . l)(apply listcomp b> x l))
+(define (>= x . l)(apply listcomp b>= x l))
+
+(define (bmax x y)(if (> x y) x y))
+(define (bmin x y)(if (< x y) x y))
+(define (maxminhelper f x . l)
+(if (null? l) x (f x (apply maxminhelper f (car l) (cdr l)))))
+(define (max x . l)
+(apply maxminhelper bmax x l))
+(define (min x . l)
+(apply maxminhelper bmin x l))
 
 (define (zero? x) (if (= x 0) #t #f))
 (define (positive? x) (> x 0))
 (define (negative? x) (< x 0))
-(define (odd? x) (cond ((= x 0) #t) ((= x 1) #f) (else (odd? (abs (- 2 x))))))
-(define (even? x) (not (odd? x)))
 
-(define (max x y . l) (if (bmax x y) (if (not (null? (cdr l)))) (max y (car l) (cdr l)) (max y (car l))))
-(define (min x y . l) (if (bmin x y) (if (not (null? (cdr l)))) (min y (car l) (cdr l)) (min y (car l))))
+(define (odd? x)
+    (cond
+        ((= x 0) #t)
+        ((= x 1) #f)
+        (else (odd? (abs (- 2 x))))))
+
+(define (even? x)
+    (not (odd? x)))
 
 (define (+ . l) (if (null? l) 0 (b+ (car l) (apply + (cdr l)))))
 
-(define (- . l)
-    (let
-        ((x (car l))
-         (list (cdr l))
-         (minus (lambda (y)
-                    (if (null? y) 0
-                        (begin
-                            (b- x y)
-                            (minus (cdr y)))))))))
+(define (- x . l)
+    (if(null? l) x
+           (apply - (b- x (car l)) (cdr l) )))
+
+
+
 (define (* . l) (if (null? l) 1 (b* (car l) (apply * (cdr l)))))
 
 

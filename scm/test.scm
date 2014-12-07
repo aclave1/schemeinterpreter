@@ -1,12 +1,14 @@
 (load "builtin.scm")
-(load "init.scm")
+(load "ini.scm")
 (define (assert pred) (if pred (display "")(display "failed\n")))
-"move this string around to mark what test failed in your code"
 (newline)
 (newline)
 (newline)
 (newline)
 (assert (= (+ 1 2 3) 6))
+(assert (= 1 1))
+(assert (= 2 2))
+(assert (= -1 -1))
 (assert (= (- 5 2 1) 2))
 (assert (= (- 8 1 -1 1) 7))
 (assert (= 42))
@@ -18,8 +20,11 @@
 (assert (eq? (< 1 2 3) #t))
 (assert (eq? (= 1 1 1 1) #t))
 (assert (eq? (= 1 1 1 2) #f))
+
 (assert (= (max 1 2 3 4 3 2 1) 4))
 (assert (= (min 1 2 3 4 5 6 5 4) 1))
+
+
 (assert (eq? (zero? 1) #f))
 (assert (eq? (zero? 0) #t))
 (assert (eq? (zero? 0) #t))
@@ -40,6 +45,7 @@
 (assert (= (length '(1 2 3 4 5 (6 7))) 6))
 (assert (equal? (append '(1 2) 4) '(1 2 . 4)))
 (assert (equal? (reverse '(1 2 3)) '(3 2 1)))
+"move this string around to mark what test failed in your code"
 (assert (eq? (odd? 2) #f) )
 (assert (eq? (odd? 4) #f) )
 (assert (eq? (odd? -4) #f) )
@@ -51,6 +57,7 @@
 (assert (eq? (even? -2) #t))
 (assert (eq? (even? -2) #t))
 (newline)
+
 (assert (eq? (even? 3) #f))
 (assert (eq? (even? 1) #f))
 (assert (eq? (even? -3) #f))
@@ -80,3 +87,5 @@
 (define (ddisplay x y)
     (begin (display x)(display" ")(display y)(display" ")))
 (for-each ddisplay '(good your for-each ) '( job n-ary works))
+
+(assert (= (max 1) 1))
