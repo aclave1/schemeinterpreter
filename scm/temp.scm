@@ -1,16 +1,27 @@
-(define (eqv? x y)
-    (cond
-        (and (number? x) (number? y) (= x y))
-        (else (eq? x y))))
-(define (equal? x y)
-    (cond
-        (and (list? x)(list? y)
-             (begin
-                 (eq? (car x) (car y))
-                 (equal? (cdr x) (cdr y))))
-        (else (eq? x y))))
+(define builtin= =)
+(define (b= x y) (builtin= x y))
+(define builtin< <)
+(define (b< x y) (builtin< x y))
+(define builtin> >)
+(define (b> x y) (builtin> x y))
+(define builtin<= <=)
+(define (b<= x y) (builtin<= x y))
+(define builtin>= >=)
+(define (b>= x y) (builtin>= x y))
+
+(define (listcomp f x . l)
+  (cond
+    ((null? l) #t)
+    ((f x (car l))(apply = x (cdr l)))
+    (else #f)))
 
 
 
-(equal? '(1 2) '(1 2))
-(equal? "alex" "alex")
+(define (< x . l)(apply listcomp b< x l))
+(define (<= x . l)(apply listcomp b<= x l))
+(define (= x . l)(apply listcomp b= x l))
+
+
+(< 1 2 3)
+(<= 1 1 2 2 3 3)
+(= 1 1 1)

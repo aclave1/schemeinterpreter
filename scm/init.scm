@@ -1,9 +1,17 @@
-(define (= x y . l) (if (b= x y) (if (not (null? (cdr l)))) (= y (car l) (cdr l)) (= y (car l))))
+(define (listcomp f x . l)
+  (cond
+    ((null? l) #t)
+    ((f x (car l))(apply = x (cdr l)))
+    (else #f)))
 
-(define (< x y . l) (if (b< x y) (if (not (null? (cdr l)))) (< y (car l) (cdr l)) (< y (car l))))
-(define (> x y . l) (if (b> x y) (if (not (null? (cdr l)))) (> y (car l) (cdr l)) (> y (car l))))
-(define (<= x y . l) (if (b<= x y) (if (not (null? (cdr l)))) (<= y (car l) (cdr l)) (<= y (car l))))
-(define (>= x y . l) (if (b>= x y) (if (not (null? (cdr l)))) (>= y (car l) (cdr l)) (>= y (car l))))
+
+
+(define (< x . l)(apply listcomp b< x l))
+(define (<= x . l)(apply listcomp b<= x l))
+(define (= x . l)(apply listcomp b= x l))
+(define (> x . l)(apply listcomp b> x l))
+(define (>= x . l)(apply listcomp b>= x l))
+
 
 (define (zero? x) (if (= x 0) #t #f))
 (define (positive? x) (> x 0))

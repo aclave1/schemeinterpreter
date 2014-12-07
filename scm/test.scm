@@ -7,6 +7,7 @@
 (newline)
 (newline)
 (assert (= (+ 1 2 3) 6))
+(assert (b= 1 1)) 
 (assert (= (- 5 2 1) 2))
 (assert (= (- 8 1 -1 1) 7))
 (assert (= 42))
