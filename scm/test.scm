@@ -14,7 +14,6 @@
 (assert (= (- 8 1 -1 1) 7))
 (assert (= 42))
 (assert (= (* 2 2 3) 12))
-"move this string around to mark what test failed in your code"
 (assert (eq? (< 1 2 3) #t))
 (assert (eq? (<= 1 1 2 2 3 3) #t))
 (assert (eq? (>= 3 3 2 2 1 1) #t))
@@ -58,12 +57,12 @@
 (assert (eq? (even? -4) #t))
 (assert (eq? (even? -2) #t))
 (assert (eq? (even? -2) #t))
-(newline)
-
+(even? -2)
 (assert (eq? (even? 3) #f))
 (assert (eq? (even? 1) #f))
 (assert (eq? (even? -3) #f))
 (assert (eq? (even? -1) #f))
+"move this string around to mark what test failed in your code"
 (define (double x) (+ x x))
 (assert (equal? (map double '(1 2 3)) '(2 4 6)))
 (assert (equal? (map + '(1 1) '(2 2) '(3 3)) '(6 6)))
