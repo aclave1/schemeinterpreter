@@ -46,20 +46,19 @@
 
 (define (not pred) (if pred #f #t))
 
-;(define (and . l)
-;    (if (null? (cdr l)) (car l)
-;        (if (eq? (car l) #f) #f (apply and (cdr l)))))
-;
-;(define (or . l) (if (eq? (car l) #f) (apply or (cdr l)) (car l)))
+(define (and . l)
+    (if (null? (cdr l)) (car l)
+        (if (eq? (car l) #f) #f (apply and (cdr l)))))
+
+(define (or . l) (if (eq? (car l) #f) (apply or (cdr l)) (car l)))
 
 (define (list . x) (cons (car x) (cdr x)))
 (define (length l) (if (null? l) 0 (+ 1 (length (cdr l)))))
 (define (append l x) (if (null? l) x (cons (car l) (append (cdr l) x))))
 (define (last . l) (if (= (length l) 1) (car l) (apply last (cdr l))))
-;(define (reverse l)
-;    (let (acc '())
-;        (append acc (car l))
-;        (reverse (cdr l) acc)))
+(define (reverse l)
+ (if (null? l) '()
+   (append (reverse (cdr l)) (list (car l)))))
 
 ;; iterates over the list and returns l if pred function is true when called with x and l as args
 (define (retlist pred x l)

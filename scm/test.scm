@@ -1,6 +1,8 @@
 (load "builtin.scm")
 (load "ini.scm")
 (define (assert pred) (if pred (display "")(display "failed\n")))
+"move this string around to mark what test failed in your code"
+
 (newline)
 (newline)
 (newline)
@@ -46,7 +48,6 @@
 (assert (= (length '(1 2 3 4 5 (6 7))) 6))
 (assert (equal? (append '(1 2) 4) '(1 2 . 4)))
 (assert (equal? (reverse '(1 2 3)) '(3 2 1)))
-"move this string around to mark what test failed in your code"
 (assert (eq? (odd? 2) #f) )
 (assert (eq? (odd? 4) #f) )
 (assert (eq? (odd? -4) #f) )
@@ -62,7 +63,6 @@
 (assert (eq? (even? 1) #f))
 (assert (eq? (even? -3) #f))
 (assert (eq? (even? -1) #f))
-"move this string around to mark what test failed in your code"
 (define (double x) (+ x x))
 (assert (equal? (map double '(1 2 3)) '(2 4 6)))
 (assert (equal? (map + '(1 1) '(2 2) '(3 3)) '(6 6)))
