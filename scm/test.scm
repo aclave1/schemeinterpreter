@@ -12,6 +12,7 @@
 (assert (= (- 8 1 -1 1) 7))
 (assert (= 42))
 (assert (= (* 2 2 3) 12))
+"move this string around to mark what test failed in your code"
 (assert (eq? (< 1 2 3) #t))
 (assert (eq? (<= 1 1 2 2 3 3) #t))
 (assert (eq? (>= 3 3 2 2 1 1) #t))

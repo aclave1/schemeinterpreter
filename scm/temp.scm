@@ -12,7 +12,7 @@
 (define (listcomp f x . l)
   (cond
     ((null? l) #t)
-    ((f x (car l))(apply = x (cdr l)))
+    ((f x (car l))(apply listcomp f x (cdr l)))
     (else #f)))
 
 
