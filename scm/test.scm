@@ -1,8 +1,15 @@
 (load "builtin.scm")
 (load "ini.scm")
 (define (assert pred) (if pred (display "")(display "failed\n")))
-"move this string around to mark what test failed in your code"
 
+(newline)
+(newline)
+(newline)
+(newline)
+(newline)
+(newline)
+(newline)
+(newline)
 (newline)
 (newline)
 (newline)
@@ -68,6 +75,8 @@
 (assert (equal? (map + '(1 1) '(2 2) '(3 3)) '(6 6)))
 (for-each display '( good job ))
 (newline)
+"move this string around to mark what test failed in your code"
+
 (assert (equal? (memq 'a '( f p a q  b c)) '(a q b c) ))
 (assert (equal? (memv 'a '( f p a q  b c)) '(a q b c) ))
 (assert (equal? (member 'a '( f p a q  b c)) '(a q b c) ))

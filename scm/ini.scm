@@ -1,3 +1,7 @@
+
+
+
+
 (define (listcomp f x . l)
     (cond
         ((null? l) #t)
@@ -52,7 +56,7 @@
 
 (define (or . l) (if (eq? (car l) #f) (apply or (cdr l)) (car l)))
 
-(define (list . x) (cons (car x) (cdr x)))
+(define (list . x) x)
 (define (length l) (if (null? l) 0 (+ 1 (length (cdr l)))))
 (define (append l x) (if (null? l) x (cons (car l) (append (cdr l) x))))
 (define (last . l) (if (= (length l) 1) (car l) (apply last (cdr l))))
@@ -129,18 +133,17 @@
 
 (define (eqv? x y . l)
   (define (eqv x y)
-    (cond
-          ((and (boolean? x) (boolean? y)) (eq? x y))
+    (cond ((and (boolean? x) (boolean? y)) (eq? x y))
+          ((and (number? x) (number? y)) (= x y))
           ((and (string? x) (string? y)) (eq? x y))
           ((and (null? x) (null? y)) #t)
           ((and (symbol? x) (symbol? y)) (eq? x y))
-          ((and (number? x) (number? y)) (= x y))
           (else #f)))
-  (if (> (length l) 0)
+  (if (null? l)
+    (eqv x y)
     (if (eqv x y)
       (apply eqv? (cons y l))
-      #f)
-    (eqv x y)))
+      #f)))
 
 (define (equal? x y)
   (cond (and (pair? x) (pair? y))
